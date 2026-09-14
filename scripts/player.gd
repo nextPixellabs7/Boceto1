@@ -4,17 +4,13 @@ extends CharacterBody2D
 
 var current_weapon: String = "sword"
 
-func _physics_process(_delta):
-	# Movimiento WASD
-	var direction = Input.get_vector(
-		"move_left",
-		"move_right",
-		"move_up",
-		"move_down"
-	)
+
+
+func _physics_process(_delta: float) -> void:
+	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	
 	velocity = direction * speed
 	move_and_slide()
-
 	# Mirar hacia el mouse
 	look_at(get_global_mouse_position())
 	# Cambiar arma
