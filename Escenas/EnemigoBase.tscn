@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bbr4adv7sj8fb"]
+
+[ext_resource type="Script" uid="uid://dqwxsmfckp2io" path="res://Scripts/EnemigoBase.gd" id="1_rh4lt"]
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="2_nxnwl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jv1ba"]
+radius = 67.0
+height = 142.0
+
+[node name="Enemigo base" type="CharacterBody2D" unique_id=1649633278]
+script = ExtResource("1_rh4lt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1312258938]
+shape = SubResource("CapsuleShape2D_jv1ba")
+debug_color = Color(0.9742381, 0.116502695, 0.28967178, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1139268276]
+texture = ExtResource("2_nxnwl")
