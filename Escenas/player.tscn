@@ -7,10 +7,12 @@
 radius = 36.0
 height = 126.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(95, 20)
+
 [node name="Player" type="CharacterBody2D" unique_id=2052637104]
 motion_mode = 1
 script = ExtResource("1_i8vih")
-speed = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1676594021]
 scale = Vector2(0.5859375, 1)
@@ -20,4 +22,8 @@ texture = ExtResource("1_cnkc8")
 shape = SubResource("CapsuleShape2D_i8vih")
 disabled = true
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1819922773]
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=1614106229]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=523663149]
+position = Vector2(84.5, 0)
+shape = SubResource("RectangleShape2D_g4v7s")
