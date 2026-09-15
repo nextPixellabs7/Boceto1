@@ -4,7 +4,9 @@ extends CharacterBody2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
 @onready var attack_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
 var current_weapon: String = "sword"
-
+var sword_damage: int = 20
+var dagger_damage: int = 10
+var axe_damage: int = 40
 
 
 func _physics_process(_delta: float) -> void:
@@ -38,16 +40,30 @@ func _physics_process(_delta: float) -> void:
 
 func attack():
 	attack_hitbox.monitoring = true
+	var damage = 0
 	match current_weapon:
 		"sword":
+			damage = sword_damage
 			print("Ataque de espada")
 
 		"dagger":
+			damage = dagger_damage
 			print("Ataque de daga")
 
 		"axe":
+			damage = axe_damage
 			print("Ataque de gran hacha")
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().physics_frame
+	var bodies = attack_hitbox.get_overlapping_bodies()
+
+	print("Cuerpos detectados: ", bodies.size())
+
+	for body in bodies:
+		print("Detectado: ", body.name)
+
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+	attack_hitbox.monitoring = false
 
 func update_hitbox():
 	match current_weapon:
