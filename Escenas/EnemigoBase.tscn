@@ -22,6 +22,7 @@ modulate = Color(1, 0.08235294, 0, 1)
 texture = ExtResource("2_nxnwl")
 
 [node name="Cono" type="Area2D" parent="Sprite2D" unique_id=911588561]
+rotation = -1.5706835
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/Cono" unique_id=1850802454]
 build_mode = 1

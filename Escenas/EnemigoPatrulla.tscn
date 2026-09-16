@@ -1,34 +1,20 @@
 [gd_scene format=3 uid="uid://ccck5wmds01aw"]
 
-[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="1_rgarq"]
+[ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/EnemigoBase.tscn" id="1_rgarq"]
 
-[sub_resource type="GDScript" id="GDScript_jv1ba"]
-script/source = "extends \"res://Scripts/EnemigoBase.gd\"
+[sub_resource type="Curve2D" id="Curve2D_rgarq"]
+_data = {
+"points": PackedVector2Array(-81.07, -141.57, 81.07, 141.57, 486, 52, 193.06398, -194.46878, -193.06398, 194.46878, 674, 375, 175.54561, 91.79908, -175.54561, -91.79908, -614, 607, -107.90418, 72.47296, 107.90418, -72.47296, -779, -285, -102.93012, 74.38016, 102.93012, -74.38016, -115, 7, -181.76137, 2.3691826, 181.76137, -2.3691826, 203, -592, -71.39, -133.1, 71.39, 133.1, 486, 52)
+}
+point_count = 7
 
-@export var puntosPatrulla: Array
+[node name="Node2D" type="Node2D" unique_id=2135933568]
 
-var estado
+[node name="Path2D" type="Path2D" parent="." unique_id=1792726082]
+curve = SubResource("Curve2D_rgarq")
 
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=1808258275]
+position = Vector2(486, 52)
+rotation = 1.0507302
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	estado = \"Idle\"
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mlkn2"]
-radius = 89.20202
-
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=2052452413]
-script = SubResource("GDScript_jv1ba")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1532651132]
-shape = SubResource("CircleShape2D_mlkn2")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1113257579]
-modulate = Color(1, 1, 0.047058824, 1)
-texture = ExtResource("1_rgarq")
+[node name="Enemigo base" parent="Path2D/PathFollow2D" unique_id=1649633278 instance=ExtResource("1_rgarq")]

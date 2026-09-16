@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dp40u5m21yods"]
 
-[ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/EnemigoBase.tscn" id="1_buhjg"]
-[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="2_p6pa3"]
-[ext_resource type="Script" uid="uid://dtiuquxs40il8" path="res://Scripts/Personajeprueba.gd" id="2_x77hp"]
+[ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/EnemigoBase.tscn" id="1_xbkjb"]
+[ext_resource type="Script" uid="uid://dtiuquxs40il8" path="res://Scripts/Personajeprueba.gd" id="2_yg8uy"]
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="3_2alje"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jv1ba"]
 radius = 67.0
@@ -22,20 +22,20 @@ size = Vector2(0.9879999, 0.97356856)
 
 [node name="Prueba" type="Node2D" unique_id=1908379066]
 
-[node name="Enemigo base" parent="." unique_id=1649633278 instance=ExtResource("1_buhjg")]
+[node name="Enemigo base" parent="." unique_id=1649633278 instance=ExtResource("1_xbkjb")]
 position = Vector2(853, -3)
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1009882557]
 slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
-script = ExtResource("2_x77hp")
+script = ExtResource("2_yg8uy")
 
 [node name="Player" type="CollisionShape2D" parent="Player" unique_id=1205636202]
 shape = SubResource("CapsuleShape2D_jv1ba")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player/Player" unique_id=1709072587]
-texture = ExtResource("2_p6pa3")
+texture = ExtResource("3_2alje")
 
 [node name="Area2D" type="Area2D" parent="Player" unique_id=1948423907]
 

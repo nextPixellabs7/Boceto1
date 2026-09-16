@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 @onready var sprite = $Sprite2D
 
@@ -8,12 +8,28 @@ var player: Node = null
 var near: bool = false
 var seen: bool = false
 
+enum STATE{
+	idle,
+	persiguiendo,
+	caminando,
+	corriendo
+}
+
+
 func _ready() -> void:
-	pass
+	
+	velocity = Vector2.ZERO
+
 func _process(delta: float) -> void:
 	
-	sprite.rotation_degrees += 0.5 * 1
 	
+	#sprite.rotation_degrees += 0.5 * 1
+	
+	_checkPlayer()
+	
+	move_and_slide()
+
+func _checkPlayer() -> void:
 	if player != null and near:
 		print("Se que estas cerca...")
 		if seen:
@@ -24,9 +40,14 @@ func _process(delta: float) -> void:
 				var collider = raycast.get_collider()
 				if collider.name == "Player":
 					
-					print("Te veo!")
+					var direction = global_position.direction_to(player.global_position)
+					velocity = direction * 150
+					look_at(player.global_position)
+					#print("Te veo!")
 				else:
-					print("No te veo, pero sé que estás ahí")
+					pass
+					#print("No te veo, pero sé que estás ahí")
+	
 
 func _takeDamage(damage: float) -> void:
 	vida -= damage
@@ -47,8 +68,8 @@ func _on_rango_body_entered(body: CharacterBody2D) -> void:
 func _on_rango_body_exited(body: CharacterBody2D) -> void:
 	if body.name == "Player":
 		player = null
-		near = true
-		print("No se donde estas...")
+		near = false
+		#print("No se donde estas...")
 
 
 func _on_vision_body_entered(body: Node2D) -> void:
@@ -59,4 +80,4 @@ func _on_vision_body_entered(body: Node2D) -> void:
 func _on_vision_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		seen = false
-		print("Ya no te veo...")
+		#print("Ya no te veo...")
