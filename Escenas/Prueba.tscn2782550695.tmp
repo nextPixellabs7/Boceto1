@@ -11,50 +11,27 @@ height = 164.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jv1ba"]
 radius = 77.10383
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj86u"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ew6px"]
-material = SubResource("StandardMaterial3D_yj86u")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ieep"]
-size = Vector2(0.9879999, 0.97356856)
-
 [node name="Prueba" type="Node2D" unique_id=1908379066]
 
 [node name="Enemigo base" parent="." unique_id=1649633278 instance=ExtResource("1_buhjg")]
-position = Vector2(853, -3)
+position = Vector2(268, -3)
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1009882557]
-slide_on_ceiling = false
-floor_stop_on_slope = false
-floor_block_on_wall = false
 script = ExtResource("2_x77hp")
 
-[node name="Player" type="CollisionShape2D" parent="Player" unique_id=1205636202]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1205636202]
 shape = SubResource("CapsuleShape2D_jv1ba")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player/Player" unique_id=1709072587]
+[node name="Sprite2D" type="Sprite2D" parent="Player/CollisionShape2D" unique_id=1709072587]
 texture = ExtResource("2_p6pa3")
 
 [node name="Area2D" type="Area2D" parent="Player" unique_id=1948423907]
+position = Vector2(143, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=1695421790]
-position = Vector2(125, -2)
 shape = SubResource("CircleShape2D_jv1ba")
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1039904036]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1039904036]
 position = Vector2(1, -5)
 scale = Vector2(1, 2.1999998)
 zoom = Vector2(0.605, 0.605)
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1117787286]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(655.875, 153.125)
-scale = Vector2(393.7499, 165.75)
-mesh = SubResource("BoxMesh_ew6px")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D" unique_id=989887802]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D/StaticBody2D" unique_id=1437838104]
-shape = SubResource("RectangleShape2D_5ieep")

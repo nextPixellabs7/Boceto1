@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://ccck5wmds01aw"]
+
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="1_rgarq"]
+
+[sub_resource type="GDScript" id="GDScript_jv1ba"]
+script/source = "extends \"res://Scripts/EnemigoBase.gd\"
+
+@export var puntosPatrulla: Array
+
+var estado
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	estado = \"Idle\"
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mlkn2"]
+radius = 89.20202
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=2052452413]
+script = SubResource("GDScript_jv1ba")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1532651132]
+shape = SubResource("CircleShape2D_mlkn2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1113257579]
+modulate = Color(1, 1, 0.047058824, 1)
+texture = ExtResource("1_rgarq")

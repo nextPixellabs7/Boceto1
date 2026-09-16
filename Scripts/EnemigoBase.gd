@@ -1,18 +1,62 @@
-extends Node
+extends Node2D
+
+@onready var sprite = $Sprite2D
 
 var vida: float = 20
+@onready var raycast: RayCast2D = $RayCast2D
+var player: Node = null
+var near: bool = false
+var seen: bool = false
+
+func _ready() -> void:
+	pass
+func _process(delta: float) -> void:
+	
+	sprite.rotation_degrees += 0.5 * 1
+	
+	if player != null and near:
+		print("Se que estas cerca...")
+		if seen:
+			raycast.target_position = to_local(player.global_position)
+			raycast.force_raycast_update()
+			
+			if raycast.is_colliding():
+				var collider = raycast.get_collider()
+				if collider.name == "Player":
+					
+					print("Te veo!")
+				else:
+					print("No te veo, pero sé que estás ahí")
 
 func _takeDamage(damage: float) -> void:
 	vida -= damage
 	
 	if vida <= 0:
-		queue_free()
+		_Die()
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _Die() -> void:
+	queue_free()
+
+func _on_rango_body_entered(body: CharacterBody2D) -> void:
+	if body.name == "Player":
+		near = true
+		player = body
+	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_rango_body_exited(body: CharacterBody2D) -> void:
+	if body.name == "Player":
+		player = null
+		near = true
+		print("No se donde estas...")
+
+
+func _on_vision_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		seen = true
+
+
+func _on_vision_body_exited(body: Node2D) -> void:
+	if body.name == "Player":
+		seen = false
+		print("Ya no te veo...")

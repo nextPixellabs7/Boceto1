@@ -7,12 +7,37 @@
 radius = 67.0
 height = 142.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jv1ba"]
+radius = 575.1956
+
 [node name="Enemigo base" type="CharacterBody2D" unique_id=1649633278]
 script = ExtResource("1_rh4lt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1312258938]
+[node name="Colision enemigo" type="CollisionShape2D" parent="." unique_id=1312258938]
 shape = SubResource("CapsuleShape2D_jv1ba")
 debug_color = Color(0.9742381, 0.116502695, 0.28967178, 0.41960785)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1139268276]
+modulate = Color(1, 0.08235294, 0, 1)
 texture = ExtResource("2_nxnwl")
+
+[node name="Cono" type="Area2D" parent="Sprite2D" unique_id=911588561]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/Cono" unique_id=1850802454]
+build_mode = 1
+polygon = PackedVector2Array(-420, 500, 420, 500, 0, 0)
+
+[node name="Entorno" type="Area2D" parent="." unique_id=21366456]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entorno" unique_id=939336328]
+shape = SubResource("CircleShape2D_jv1ba")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1635677252]
+modulate = Color(1, 0, 0, 1)
+self_modulate = Color(1, 0, 0, 1)
+target_position = Vector2(0, 0)
+
+[connection signal="body_entered" from="Sprite2D/Cono" to="." method="_on_vision_body_entered"]
+[connection signal="body_exited" from="Sprite2D/Cono" to="." method="_on_vision_body_exited"]
+[connection signal="body_entered" from="Entorno" to="." method="_on_rango_body_entered"]
+[connection signal="body_exited" from="Entorno" to="." method="_on_rango_body_exited"]
