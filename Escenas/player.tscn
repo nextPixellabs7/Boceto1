@@ -28,5 +28,5 @@ z_index = 2
 collision_mask = 255
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=523663149]
-position = Vector2(47.25, 0)
+position = Vector2(31, 0)
 shape = SubResource("RectangleShape2D_g4v7s")

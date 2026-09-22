@@ -1,11 +1,15 @@
 extends CharacterBody2D
 
-@export var health: int = 200
+@export var health: int = 100
 
-func take_damage(damage: int):
+
+func _takedamage(damage: int):
 	print("RECIBÍ DAÑO: ", damage)
 
 	health -= damage
+
+	print("VIDA RESTANTE: ", health)
+
 	if health <= 0:
 		print("ENEMIGO MUERTO")
 		queue_free()
