@@ -294,3 +294,6 @@ tile_set = SubResource("TileSet_vt1rs")
 
 [node name="Dummy" parent="." unique_id=840180630 instance=ExtResource("48_3xwt8")]
 position = Vector2(302, -13)
+
+[node name="Dummy2" parent="." unique_id=459626527 instance=ExtResource("48_3xwt8")]
+position = Vector2(309, 92)
