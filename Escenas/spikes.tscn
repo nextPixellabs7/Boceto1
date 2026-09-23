@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dd3jp6wjwu4lp"]
+
+[ext_resource type="Script" uid="uid://8uhjeu6alxl" path="res://Scripts/spikes.gd" id="1_u2b8i"]
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="2_w5tdm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jv1ba"]
+size = Vector2(140, 138)
+
+[node name="Area2D" type="Area2D" unique_id=1334134302]
+script = ExtResource("1_u2b8i")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=194150846]
+texture = ExtResource("2_w5tdm")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1284711276]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1403223106]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_jv1ba")
+debug_color = Color(0.7577855, 0, 0.33765718, 0.41960785)
+
+[node name="Timer" type="Timer" parent="." unique_id=1971971787]

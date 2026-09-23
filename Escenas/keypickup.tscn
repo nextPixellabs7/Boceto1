@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cti7uelm08q82"]
+
+[ext_resource type="Script" uid="uid://0x55xb6scksi" path="res://Scripts/keypickup.gd" id="1_jkyxs"]
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="1_twpht"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jv1ba"]
+size = Vector2(40, 39)
+
+[node name="keypickup" type="Area2D" unique_id=114382594]
+script = ExtResource("1_jkyxs")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=550798536]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_twpht")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1047243890]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_jv1ba")

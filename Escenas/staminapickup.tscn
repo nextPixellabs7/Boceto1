@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dcb060s4amri7"]
+
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="1_0fe5l"]
+[ext_resource type="Script" uid="uid://t2e6wvvxqh2u" path="res://Scripts/staminapickup.gd" id="1_efu24"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efu24"]
+size = Vector2(52, 51)
+
+[node name="staminapickup" type="Area2D" unique_id=605378329]
+script = ExtResource("1_efu24")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=424530417]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_0fe5l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1216090127]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_efu24")
+debug_color = Color(0.65150094, 0.519245, 0.022287041, 0.41960785)

@@ -1,3 +1,37 @@
 [gd_scene format=3 uid="uid://jqrh11ee4e4t"]
 
+[ext_resource type="PackedScene" uid="uid://cs5uds4lseofy" path="res://Escenas/player.tscn" id="1_6lbni"]
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="2_vt1rs"]
+[ext_resource type="PackedScene" uid="uid://c6qc2ne1rsakw" path="res://Escenas/healthpickup.tscn" id="3_0kh0y"]
+[ext_resource type="PackedScene" uid="uid://dcb060s4amri7" path="res://Escenas/staminapickup.tscn" id="4_7xwpo"]
+[ext_resource type="PackedScene" uid="uid://cti7uelm08q82" path="res://Escenas/keypickup.tscn" id="5_2ia52"]
+[ext_resource type="PackedScene" uid="uid://dd3jp6wjwu4lp" path="res://Escenas/spikes.tscn" id="6_crgrh"]
+[ext_resource type="PackedScene" uid="uid://bhnn3rmvkvhgx" path="res://Escenas/door.tscn" id="7_s2ilj"]
+
 [node name="main" type="Node2D" unique_id=87351606]
+
+[node name="player" parent="." unique_id=543574991 instance=ExtResource("1_6lbni")]
+position = Vector2(6, 0)
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=754917544]
+position = Vector2(-6, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1390299179]
+position = Vector2(279.00003, 101.00001)
+scale = Vector2(2.3671875, 2.1328127)
+texture = ExtResource("2_vt1rs")
+
+[node name="healthpickup" parent="." unique_id=2075056121 instance=ExtResource("3_0kh0y")]
+position = Vector2(9, -252)
+
+[node name="staminapickup" parent="." unique_id=605378329 instance=ExtResource("4_7xwpo")]
+position = Vector2(-159, -251)
+
+[node name="keypickup" parent="." unique_id=114382594 instance=ExtResource("5_2ia52")]
+position = Vector2(-320, -261)
+
+[node name="Area2D" parent="." unique_id=1334134302 instance=ExtResource("6_crgrh")]
+position = Vector2(311, -228)
+
+[node name="door" parent="." unique_id=1547949797 instance=ExtResource("7_s2ilj")]
+position = Vector2(-489, -1)
