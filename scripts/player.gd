@@ -9,9 +9,12 @@ extends CharacterBody2D
 var attack_hitbox: Area2D
 
 # =========================
+# VIDA
+@export var max_health: int = 100
+var health: int
+# =========================
 # ARMAS
 var current_weapon: String = "sword"
-
 # =========================
 # COMBOS
 var combo_step: int = 0
@@ -29,6 +32,8 @@ var is_dodging: bool = false
 var can_dodge: bool = true
 #==========================
 func _ready():
+	health = max_health
+	
 	sword.visible = true
 	dagger.visible = false
 	axe.visible = false
@@ -201,3 +206,20 @@ func _dodge(direction: Vector2):
 	is_dodging = false
 	await get_tree().create_timer(dodge_cooldown).timeout
 	can_dodge = true
+	
+# =========================
+# RECIBIR DAÑO
+func _takedamage(damage: int):
+	if is_dodging:
+		print("DODGE - DAÑO EVITADO")
+		return
+	health -= damage
+	print("PLAYER RECIBIÓ DAÑO: ", damage)
+	print("VIDA RESTANTE: ", health)
+	if health <= 0:
+		_die()
+# =========================
+# MUERTE
+func _die():
+	print("PLAYER MUERTO")
+	set_physics_process(false)
