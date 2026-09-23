@@ -10,8 +10,10 @@ z_index = 5
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1429261268]
 
-[node name="Dummy" parent="." unique_id=840180630 instance=ExtResource("48_3xwt8")]
-position = Vector2(302, -13)
+[node name="Dummy" parent="." unique_id=459626527 instance=ExtResource("48_3xwt8")]
+position = Vector2(269, 31)
+collision_layer = 2
 
-[node name="Dummy2" parent="." unique_id=459626527 instance=ExtResource("48_3xwt8")]
-position = Vector2(309, 92)
+[node name="Dummy2" parent="." unique_id=1355668876 instance=ExtResource("48_3xwt8")]
+position = Vector2(266, -197)
+collision_layer = 2
