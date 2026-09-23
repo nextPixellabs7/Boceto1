@@ -53,3 +53,5 @@ func heal(amount: float) -> void:
 
 func restore_stamina(amount: float) -> void:
 	stamina = clampf(stamina + amount, 0.0, max_stamina)
+# hacer uan funcion de _interact para que cuando se utilice la E diga "no se utiliza en este lugar" y cuando si diga "utilizaste llave"
+# junto a la anterior se deberia comrpobar que tienes la llave pq die que la obtuviste pero talvez no se guardo.
