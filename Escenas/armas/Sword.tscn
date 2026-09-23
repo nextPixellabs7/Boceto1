@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d233kk0dbqijt"]
+
+[ext_resource type="Script" uid="uid://c0lucrh7celsn" path="res://scripts/Sword.gd" id="1_6v3mi"]
+[ext_resource type="Texture2D" uid="uid://dvk3gbwpkvabg" path="res://assets/free pack 1.1ver/Dark Sawtooth.png" id="1_76lqt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(73, 16.5)
+
+[node name="Sword" type="Node2D" unique_id=184923858]
+script = ExtResource("1_6v3mi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1798488481]
+texture_filter = 1
+position = Vector2(35.526, 0.068)
+rotation = 0.781595
+scale = Vector2(3.021, 3)
+texture = ExtResource("1_76lqt")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=566687789]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1171157757]
+position = Vector2(50.5, 2.75)
+shape = SubResource("RectangleShape2D_g4v7s")

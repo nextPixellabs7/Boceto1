@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dkrbg3mofhpva"]
+
+[ext_resource type="Texture2D" uid="uid://ci8wdpvvl46xt" path="res://assets/free pack 1.1ver/Shadowsteel.png" id="1_ovjow"]
+[ext_resource type="Script" uid="uid://c1c6xeut8qs30" path="res://scripts/dagger.gd" id="1_r7rng"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(37.5, 8)
+
+[node name="Dagger" type="Node2D" unique_id=714303598]
+script = ExtResource("1_r7rng")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=638137485]
+texture_filter = 1
+position = Vector2(35, 0)
+rotation = 0.79023045
+scale = Vector2(2, 2)
+texture = ExtResource("1_ovjow")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1090139024]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=2098910680]
+position = Vector2(44.25, 0)
+shape = SubResource("RectangleShape2D_g4v7s")

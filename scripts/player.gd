@@ -1,18 +1,23 @@
 extends CharacterBody2D
 
 @export var speed: float = 200.0
-@onready var attack_hitbox: Area2D = $AttackHitbox
-@onready var attack_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
+@onready var attack_pivot: Node2D = $AttackHitbox
+@onready var sword = $AttackHitbox/Sword
+@onready var dagger = $AttackHitbox/Dagger
+@onready var axe = $AttackHitbox/Axe
+
+var attack_hitbox: Area2D
+var attack_shape: CollisionShape2D
 
 # =========================
 # ARMAS
 var current_weapon: String = "sword"
-var sword_damage: int = 20
+
 var dagger_damage: int = 10
 var axe_damage: int = 40
 
 # Distancia de cada arma
-var sword_distance: float = 50.0
+
 var dagger_distance: float = 35.0
 var axe_distance: float = 70.0
 
@@ -23,6 +28,13 @@ var combo_timer: float = 0.0
 var can_attack: bool = true
 
 @export var combo_time: float = 0.8
+
+func _ready():
+	sword.visible = true
+	dagger.visible = false
+	axe.visible = false
+	_updateAttackHitbox()
+	
 func _physics_process(delta: float) -> void:
 	# =========================
 	# MOVIMIENTO
@@ -34,10 +46,10 @@ func _physics_process(delta: float) -> void:
 	# DIRECCIÓN DEL ATAQUE
 	var mouse_direction := global_position.direction_to(
 		get_global_mouse_position())
-	attack_hitbox.global_position = (
+	attack_pivot.global_position = (
 		global_position
 		+ mouse_direction * _getAttackDistance())
-	attack_hitbox.global_rotation = mouse_direction.angle()
+	attack_pivot.global_rotation = mouse_direction.angle()
 
 	# =========================
 	# TEMPORIZADOR DEL COMBO
@@ -50,23 +62,32 @@ func _physics_process(delta: float) -> void:
 	# CAMBIAR ARMA
 	if Input.is_action_just_pressed("weapon_sword"):
 		current_weapon = "sword"
+		sword.visible = true
+		dagger.visible = false
+		axe.visible = false
 		combo_step = 0
 		combo_timer = 0
-		_updateHitbox()
+		_updateAttackHitbox()
 		print("Espada larga equipada")
 
 	if Input.is_action_just_pressed("weapon_dagger"):
 		current_weapon = "dagger"
+		sword.visible = false
+		dagger.visible = true
+		axe.visible = false
 		combo_step = 0
 		combo_timer = 0
-		_updateHitbox()
+		_updateAttackHitbox()
 		print("Daga equipada")
 
 	if Input.is_action_just_pressed("weapon_axe"):
 		current_weapon = "axe"
+		sword.visible = false
+		dagger.visible = false
+		axe.visible = true
 		combo_step = 0
 		combo_timer = 0
-		_updateHitbox()
+		_updateAttackHitbox()
 		print("Gran hacha equipada")
 
 	# =========================
@@ -85,9 +106,9 @@ func _attack():
 	# CONFIGURAR ARMA
 	match current_weapon:
 		"sword":
-			damage = sword_damage
+			damage = sword.damage
 			max_combo = 3
-			attack_delay = 0.15
+			attack_delay = sword.attack_delay
 			cooldown = 1.0
 		"dagger":
 			damage = dagger_damage
@@ -145,7 +166,7 @@ func _attack():
 func _getAttackDistance() -> float:
 	match current_weapon:
 		"sword":
-			return sword_distance
+			return sword.attack_distance
 		"dagger":
 			return dagger_distance
 		"axe":
@@ -154,11 +175,14 @@ func _getAttackDistance() -> float:
 
 # =========================
 # TAMAÑO DEL HITBOX
-func _updateHitbox():
+func _updateAttackHitbox():
 	match current_weapon:
 		"sword":
-			attack_shape.shape.size = Vector2(80, 40)
+			attack_hitbox = sword.hitbox
+			attack_shape = sword.hitbox_shape
 		"dagger":
-			attack_shape.shape.size = Vector2(50, 25)
+			attack_hitbox = dagger.hitbox
+			attack_shape = dagger.hitbox_shape
 		"axe":
-			attack_shape.shape.size = Vector2(120, 60)
+			attack_hitbox = axe.hitbox
+			attack_shape = axe.hitbox_shape

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dflmiuqn1ft06"]
+
+[ext_resource type="Script" uid="uid://nccjx4db3ind" path="res://scripts/axe.gd" id="1_e3fh3"]
+[ext_resource type="Texture2D" uid="uid://biihudwcoljj8" path="res://assets/free pack 1.1ver/Iron Battleaxe.png" id="1_hnrvi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 34.1321
+
+[node name="Axe" type="Node2D" unique_id=1818565763]
+script = ExtResource("1_e3fh3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=479871468]
+texture_filter = 1
+position = Vector2(35, 0)
+rotation = 0.7920409
+scale = Vector2(4, 4)
+texture = ExtResource("1_hnrvi")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=134844400]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1183199322]
+position = Vector2(71, -1.0000008)
+rotation = 1.455154
+shape = SubResource("CircleShape2D_g4v7s")
