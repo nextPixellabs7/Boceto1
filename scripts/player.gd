@@ -7,19 +7,10 @@ extends CharacterBody2D
 @onready var axe = $AttackHitbox/Axe
 
 var attack_hitbox: Area2D
-var attack_shape: CollisionShape2D
 
 # =========================
 # ARMAS
 var current_weapon: String = "sword"
-
-var dagger_damage: int = 10
-var axe_damage: int = 40
-
-# Distancia de cada arma
-
-var dagger_distance: float = 35.0
-var axe_distance: float = 70.0
 
 # =========================
 # COMBOS
@@ -107,20 +98,19 @@ func _attack():
 	match current_weapon:
 		"sword":
 			damage = sword.damage
-			max_combo = 3
+			max_combo = sword.max_combo
 			attack_delay = sword.attack_delay
-			cooldown = 1.0
+			cooldown = sword.cooldown
 		"dagger":
-			damage = dagger_damage
-			max_combo = 4
-			attack_delay = 0.08
-			cooldown = 0.6
+			damage = dagger.damage
+			max_combo = dagger.max_combo
+			attack_delay = dagger.attack_delay
+			cooldown = dagger.cooldown
 		"axe":
-			damage = axe_damage
-			max_combo = 2
-			attack_delay = 0.35
-			cooldown = 1.5
-
+			damage = axe.damage
+			max_combo = axe.max_combo
+			attack_delay = axe.attack_delay
+			cooldown = axe.cooldown
 	# =========================
 	# AVANZAR COMBO
 	combo_step += 1
@@ -168,9 +158,9 @@ func _getAttackDistance() -> float:
 		"sword":
 			return sword.attack_distance
 		"dagger":
-			return dagger_distance
+			return dagger.attack_distance
 		"axe":
-			return axe_distance
+			return axe.attack_distance
 	return 50.0
 
 # =========================
@@ -179,10 +169,7 @@ func _updateAttackHitbox():
 	match current_weapon:
 		"sword":
 			attack_hitbox = sword.hitbox
-			attack_shape = sword.hitbox_shape
 		"dagger":
 			attack_hitbox = dagger.hitbox
-			attack_shape = dagger.hitbox_shape
 		"axe":
 			attack_hitbox = axe.hitbox
-			attack_shape = axe.hitbox_shape
