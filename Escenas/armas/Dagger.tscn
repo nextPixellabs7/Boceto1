@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dkrbg3mofhpva"]
 
 [ext_resource type="Texture2D" uid="uid://ci8wdpvvl46xt" path="res://assets/free pack 1.1ver/Shadowsteel.png" id="1_ovjow"]
-[ext_resource type="Script" uid="uid://c1c6xeut8qs30" path="res://scripts/dagger.gd" id="1_r7rng"]
+[ext_resource type="Script" uid="uid://c1c6xeut8qs30" path="res://scripts/armas/dagger.gd" id="1_r7rng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(37.5, 8)

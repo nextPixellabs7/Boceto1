@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d233kk0dbqijt"]
 
-[ext_resource type="Script" uid="uid://c0lucrh7celsn" path="res://scripts/Sword.gd" id="1_6v3mi"]
+[ext_resource type="Script" uid="uid://c0lucrh7celsn" path="res://scripts/armas/Sword.gd" id="1_6v3mi"]
 [ext_resource type="Texture2D" uid="uid://dvk3gbwpkvabg" path="res://assets/free pack 1.1ver/Dark Sawtooth.png" id="1_76lqt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]

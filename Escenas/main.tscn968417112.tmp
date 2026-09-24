@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://jqrh11ee4e4t"]
 
 [ext_resource type="PackedScene" uid="uid://cs5uds4lseofy" path="res://Escenas/player.tscn" id="1_6lbni"]
-[ext_resource type="Script" uid="uid://bqwhddhjl67wt" path="res://scripts/character/ui.gd" id="3_0kh0y"]
+[ext_resource type="Script" uid="uid://bqwhddhjl67wt" path="res://scripts/ui.gd" id="3_0kh0y"]
+[ext_resource type="Script" uid="uid://ceah4i3tryg4r" path="res://scripts/PlayerControl.gd" id="4_7xwpo"]
 [ext_resource type="PackedScene" uid="uid://tigkc1gdq6f1" path="res://Escenas/dummy.tscn" id="48_3xwt8"]
 
 [node name="main" type="Node2D" unique_id=87351606]
@@ -42,3 +43,6 @@ offset_right = 70.0
 offset_bottom = 110.0
 expand_mode = 1
 stretch_mode = 5
+
+[node name="PlayerControl" type="Node" parent="." unique_id=1651239053]
+script = ExtResource("4_7xwpo")

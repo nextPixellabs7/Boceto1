@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dflmiuqn1ft06"]
 
-[ext_resource type="Script" uid="uid://nccjx4db3ind" path="res://scripts/axe.gd" id="1_e3fh3"]
+[ext_resource type="Script" uid="uid://nccjx4db3ind" path="res://scripts/armas/axe.gd" id="1_e3fh3"]
 [ext_resource type="Texture2D" uid="uid://biihudwcoljj8" path="res://assets/free pack 1.1ver/Iron Battleaxe.png" id="1_hnrvi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]

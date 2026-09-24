@@ -1,10 +1,15 @@
 [gd_scene format=3 uid="uid://cs5uds4lseofy"]
 
 [ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="1_cnkc8"]
-[ext_resource type="Script" uid="uid://cyehe25mdpfl3" path="res://scripts/player.gd" id="1_i8vih"]
+[ext_resource type="Script" uid="uid://cyehe25mdpfl3" path="res://scripts/character/player.gd" id="1_i8vih"]
 [ext_resource type="PackedScene" uid="uid://dkrbg3mofhpva" path="res://Escenas/armas/Dagger.tscn" id="3_cgfde"]
 [ext_resource type="PackedScene" uid="uid://d233kk0dbqijt" path="res://Escenas/armas/Sword.tscn" id="3_qgqwx"]
 [ext_resource type="PackedScene" uid="uid://dflmiuqn1ft06" path="res://Escenas/armas/Axe.tscn" id="5_xlwfv"]
+[ext_resource type="Script" uid="uid://ceah4i3tryg4r" path="res://scripts/estados/PlayerControl.gd" id="6_xlwfv"]
+[ext_resource type="Script" uid="uid://dgkryxadoah6b" path="res://scripts/estados/idle.gd" id="7_ohiiw"]
+[ext_resource type="Script" uid="uid://djsrhlb7kdupc" path="res://scripts/estados/move.gd" id="8_knqkl"]
+[ext_resource type="Script" uid="uid://coayuvswl8yw2" path="res://scripts/estados/attack.gd" id="9_ul4kv"]
+[ext_resource type="Script" uid="uid://b27wk5c87uo66" path="res://scripts/estados/dodge.gd" id="10_knqkl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8vih"]
 radius = 36.0
@@ -35,3 +40,18 @@ visible = false
 
 [node name="Axe" parent="AttackHitbox" unique_id=1818565763 instance=ExtResource("5_xlwfv")]
 visible = false
+
+[node name="PlayerControl" type="Node" parent="." unique_id=606003259]
+script = ExtResource("6_xlwfv")
+
+[node name="Idle" type="Node" parent="PlayerControl" unique_id=1978497084]
+script = ExtResource("7_ohiiw")
+
+[node name="Move" type="Node" parent="PlayerControl" unique_id=1730643980]
+script = ExtResource("8_knqkl")
+
+[node name="Attack" type="Node" parent="PlayerControl" unique_id=26582564]
+script = ExtResource("9_ul4kv")
+
+[node name="Dodge" type="Node" parent="PlayerControl" unique_id=716311629]
+script = ExtResource("10_knqkl")
