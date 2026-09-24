@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bbr4adv7sj8fb"]
 
-[ext_resource type="Script" uid="uid://dqwxsmfckp2io" path="res://Scripts/EnemigoBase.gd" id="1_rh4lt"]
+[ext_resource type="Script" uid="uid://cw7uhpgmxi1rx" path="res://Scripts/Componentes/ComponenteVida.gd" id="2_d64cs"]
 [ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="2_nxnwl"]
+[ext_resource type="Script" uid="uid://dm7dje3kuyfkl" path="res://Scripts/Componentes/ComponenteVision.gd" id="3_nqetu"]
+[ext_resource type="Script" uid="uid://ttwqkpjsnpuo" path="res://Scripts/Componentes/ComponenteDeteccion.gd" id="4_a08p1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jv1ba"]
 radius = 67.0
@@ -11,7 +13,6 @@ height = 142.0
 radius = 575.1956
 
 [node name="Enemigo base" type="CharacterBody2D" unique_id=1649633278]
-script = ExtResource("1_rh4lt")
 
 [node name="Colision enemigo" type="CollisionShape2D" parent="." unique_id=1312258938]
 shape = SubResource("CapsuleShape2D_jv1ba")
@@ -21,10 +22,10 @@ debug_color = Color(0.9742381, 0.116502695, 0.28967178, 0.41960785)
 modulate = Color(1, 0.08235294, 0, 1)
 texture = ExtResource("2_nxnwl")
 
-[node name="Cono" type="Area2D" parent="Sprite2D" unique_id=911588561]
+[node name="Cono" type="Area2D" parent="." unique_id=911588561]
 rotation = -1.5706835
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/Cono" unique_id=1850802454]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Cono" unique_id=1850802454]
 build_mode = 1
 polygon = PackedVector2Array(-420, 500, 420, 500, 0, 0)
 
@@ -38,7 +39,18 @@ modulate = Color(1, 0, 0, 1)
 self_modulate = Color(1, 0, 0, 1)
 target_position = Vector2(0, 0)
 
-[connection signal="body_entered" from="Sprite2D/Cono" to="." method="_on_vision_body_entered"]
-[connection signal="body_exited" from="Sprite2D/Cono" to="." method="_on_vision_body_exited"]
-[connection signal="body_entered" from="Entorno" to="." method="_on_rango_body_entered"]
-[connection signal="body_exited" from="Entorno" to="." method="_on_rango_body_exited"]
+[node name="Componentes" type="Node" parent="." unique_id=1974027664]
+
+[node name="Componente Vida" type="Node" parent="Componentes" unique_id=1404644093]
+script = ExtResource("2_d64cs")
+
+[node name="Componente Vision" type="Node" parent="Componentes" unique_id=1607710695]
+script = ExtResource("3_nqetu")
+
+[node name="Componente Deteccion" type="Node" parent="Componentes" unique_id=346253979]
+script = ExtResource("4_a08p1")
+
+[connection signal="body_entered" from="Cono" to="Componentes/Componente Vision" method="_on_vision_body_entered"]
+[connection signal="body_exited" from="Cono" to="Componentes/Componente Vision" method="_on_vision_body_exited"]
+[connection signal="body_entered" from="Entorno" to="Componentes/Componente Deteccion" method="_on_entorno_body_entered"]
+[connection signal="body_exited" from="Entorno" to="Componentes/Componente Deteccion" method="_on_entorno_body_exited"]
