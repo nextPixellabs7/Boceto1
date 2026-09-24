@@ -18,13 +18,12 @@ func _ready():
 func _onDamageAreaBodyEntered(body):
 
 	print("ENTRÓ AL DAMAGE AREA: ", body.name)
+	print("TIPO: ", body.get_class())
+	print("TIENE TAKEDAMAGE: ", body.has_method("_takedamage"))
 
-	if body.is_in_group("player"):
-		print("ES EL PLAYER")
-
-		if body.has_method("_takedamage"):
-			print("EL PLAYER TIENE TAKEDAMAGE")
-			_damagePlayer(body)
+	if body.name == "Player":
+		print("DETECTÉ AL PLAYER")
+		_damagePlayer(body)
 
 # =========================
 # HACER DAÑO
