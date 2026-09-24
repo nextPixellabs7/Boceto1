@@ -17,6 +17,7 @@ scale = Vector2(3.021, 3)
 texture = ExtResource("1_76lqt")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=566687789]
+collision_layer = 2
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1171157757]

@@ -8,53 +8,29 @@ extends CharacterBody2D
 
 var can_damage: bool = true
 
-
 func _ready():
 	damage_area.body_entered.connect(_onDamageAreaBodyEntered)
-
-
 # =========================
 # PLAYER ENTRA AL AREA
 func _onDamageAreaBodyEntered(body):
-
-	print("ENTRÓ AL DAMAGE AREA: ", body.name)
-	print("TIPO: ", body.get_class())
-	print("TIENE TAKEDAMAGE: ", body.has_method("_takedamage"))
-
 	if body.name == "Player":
-		print("DETECTÉ AL PLAYER")
 		_damagePlayer(body)
-
 # =========================
 # HACER DAÑO
-
 func _damagePlayer(body):
-
 	if not can_damage:
 		return
-
 	can_damage = false
-
 	print("DUMMY ATACÓ AL PLAYER")
-
 	body._takedamage(contact_damage)
-
 	await get_tree().create_timer(damage_cooldown).timeout
-
 	can_damage = true
-
-
 # =========================
 # RECIBIR DAÑO
-
 func _takedamage(damage: int):
-
 	print("DUMMY RECIBIÓ DAÑO: ", damage)
-
 	health -= damage
-
 	print("VIDA DEL DUMMY: ", health)
-
 	if health <= 0:
 		print("DUMMY MUERTO")
 		queue_free()

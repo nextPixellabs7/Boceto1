@@ -11,7 +11,6 @@ size = Vector2(90, 83)
 
 [node name="Dummy" type="CharacterBody2D" unique_id=459626527]
 z_index = 2
-collision_layer = 2
 script = ExtResource("1_tklkt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1772898265]
@@ -23,8 +22,9 @@ shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=651380512]
 position = Vector2(-0.5, 0)
-collision_layer = 2
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=185539453]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_yf5fn")
+debug_color = Color(0.95501095, 0.15830594, 0.37085205, 0.41960785)
