@@ -1,8 +1,12 @@
 extends Node
-
 # =========================
-# COMPROBAR SI ESTÁ QUIETO
-
-func _canEnter(direction: Vector2) -> bool:
-
-	return direction == Vector2.ZERO
+# REFERENCIA AL PLAYER
+@onready var player = owner
+# =========================
+# CICLO DEL ESTADO
+func _enter() -> void:
+	pass
+func _exit() -> void:
+	pass
+func _physics_update(_direction: Vector2, _delta: float) -> void:
+	player.velocity = Vector2.ZERO

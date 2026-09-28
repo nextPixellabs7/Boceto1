@@ -1,74 +1,73 @@
 extends Node
 # =========================
-# REFERENCIA AL PLAYER
-
-@onready var player = get_parent().get_parent()
-
+# REFERENCIAS
+@onready var player = owner
+@onready var control = get_parent()
 # =========================
-# COMPROBAR SI PUEDE ATACAR
-func _canEnter() -> bool:
-	return Input.is_action_just_pressed("attack")
+# DATOS DEL ATAQUE
+var can_attack: bool = true
+var _weapon
+var _frames: int = 0
+var _time_left: float = 0.0
 # =========================
-# EJECUTAR ATAQUE
-func _execute():
-	player.can_attack = false
-	var damage = 0
-	var max_combo = 1
-	var attack_delay = 0.15
-	var cooldown = 0.5
-	# =========================
-	# CONFIGURAR ARMA
-	match player.current_weapon:
-		"sword":
-			damage = player.sword.damage
-			max_combo = player.sword.max_combo
-			attack_delay = player.sword.attack_delay
-			cooldown = player.sword.cooldown
-		"dagger":
-			damage = player.dagger.damage
-			max_combo = player.dagger.max_combo
-			attack_delay = player.dagger.attack_delay
-			cooldown = player.dagger.cooldown
-		"axe":
-			damage = player.axe.damage
-			max_combo = player.axe.max_combo
-			attack_delay = player.axe.attack_delay
-			cooldown = player.axe.cooldown
-	# =========================
-	# AVANZAR COMBO
+# COMPROBAR SI PUEDE ENTRAR
+func _can_enter() -> bool:
+	return can_attack and Input.is_action_just_pressed("attack")
+# =========================
+# ENTRAR AL ESTADO
+func _enter() -> void:
+	_weapon = player.weapons[player.current_weapon]
+	can_attack = false
+	control.state_locked = true
+	player.combo_timer = 0.0
+	# Avanzar combo
 	player.combo_step += 1
-	if player.combo_step > max_combo:
+	if player.combo_step > _weapon.max_combo:
 		player.combo_step = 1
-	print(
-		player.current_weapon,
-		" - golpe ",
-		player.combo_step
-	)
-	# =========================
-	# ACTIVAR HITBOX
-	player.attack_hitbox.monitoring = true
-	await get_tree().physics_frame
-	var bodies = player.attack_hitbox.get_overlapping_bodies()
+	print(player.current_weapon, " - golpe ", player.combo_step)
+	# Activar hitbox
+	_frames = 0
+	_time_left = _weapon.attack_delay
+	_weapon.hitbox.monitoring = true
+# =========================
+# SALIR DEL ESTADO
+func _exit() -> void:
+	if _weapon:
+		_weapon.hitbox.monitoring = false
+# =========================
+# ACTUALIZAR
+func _physics_update(_direction: Vector2, delta: float) -> void:
+	player.velocity = Vector2.ZERO
+	_frames += 1
+	if _frames == 2:
+		_apply_damage()
+	_time_left -= delta
+	if _time_left <= 0.0:
+		_finish()
+# =========================
+# HACER DAÑO
+func _apply_damage() -> void:
+	var bodies = _weapon.hitbox.get_overlapping_bodies()
 	print("Cuerpos detectados: ", bodies.size())
-	# =========================
-	# HACER DAÑO
 	for body in bodies:
-		print("Detectado: ", body.name)
 		if body.has_method("_takedamage"):
-			body._takedamage(damage)
-	# =========================
-	# DESACTIVAR HITBOX
-	player.attack_hitbox.monitoring = false
-	# =========================
-	# ESPERA ENTRE GOLPES
-	await get_tree().create_timer(attack_delay).timeout
-	# =========================
-	# FIN DEL COMBO
-	if player.combo_step == max_combo:
+			body._takedamage(_weapon.damage)
+	_weapon.hitbox.monitoring = false
+# =========================
+# TERMINAR GOLPE
+func _finish() -> void:
+	var was_last_hit: bool = player.combo_step == _weapon.max_combo
+	var cooldown: float = _weapon.cooldown
+	control._unlock()
+	if was_last_hit:
 		print("FIN DEL COMBO")
-		await get_tree().create_timer(cooldown).timeout
 		player.combo_step = 0
-		player.combo_timer = 0
+		_start_cooldown(cooldown)
 	else:
 		player.combo_timer = player.combo_time
-	player.can_attack = true
+		can_attack = true
+# =========================
+# COOLDOWN (corre aparte, no bloquea al jugador)
+func _start_cooldown(time: float) -> void:
+	await get_tree().create_timer(time).timeout
+	can_attack = true

@@ -1,5 +1,6 @@
 extends CharacterBody2D
-
+# =========================
+# DATOS
 @export var health: int = 100
 @export var contact_damage: int = 10
 @export var damage_cooldown: float = 0.8
@@ -7,19 +8,18 @@ extends CharacterBody2D
 @onready var damage_area: Area2D = $DamageArea
 
 var can_damage: bool = true
-
-func _ready():
-	damage_area.body_entered.connect(_onDamageAreaBodyEntered)
 # =========================
-# PLAYER ENTRA AL AREA
-func _onDamageAreaBodyEntered(body):
-	if body.name == "Player":
-		_damagePlayer(body)
-# =========================
-# HACER DAÑO
-func _damagePlayer(body):
+# CONTACTO (se revisa cada frame físico)
+func _physics_process(_delta: float) -> void:
 	if not can_damage:
 		return
+	for body in damage_area.get_overlapping_bodies():
+		if body.is_in_group("player"):
+			_damagePlayer(body)
+			break
+# =========================
+# HACER DAÑO
+func _damagePlayer(body) -> void:
 	can_damage = false
 	print("DUMMY ATACÓ AL PLAYER")
 	body._takedamage(contact_damage)
@@ -27,7 +27,7 @@ func _damagePlayer(body):
 	can_damage = true
 # =========================
 # RECIBIR DAÑO
-func _takedamage(damage: int):
+func _takedamage(damage: int) -> void:
 	print("DUMMY RECIBIÓ DAÑO: ", damage)
 	health -= damage
 	print("VIDA DEL DUMMY: ", health)
