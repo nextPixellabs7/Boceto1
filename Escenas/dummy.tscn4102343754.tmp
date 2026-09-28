@@ -13,6 +13,8 @@ size = Vector2(90, 83)
 [node name="Dummy" type="CharacterBody2D" unique_id=459626527]
 z_index = 2
 script = ExtResource("1_tklkt")
+contact_damage = null
+damage_cooldown = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1772898265]
 texture = ExtResource("1_ayt8h")

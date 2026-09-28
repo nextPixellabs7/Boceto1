@@ -9,10 +9,10 @@ extends CanvasLayer
 # =========================
 # INICIO
 func _ready() -> void:
-	player.health_changed.connect(_on_health_changed)
+	player.health.changed.connect(_on_health_changed)
 	player.weapon_changed.connect(_on_weapon_changed)
-	# Estado inicial (por si el jugador ya se inicializó antes que el HUD)
-	_on_health_changed(player.health, player.max_health)
+
+	_on_health_changed(player.health.current, player.health.max_health)
 	_on_weapon_changed(player.current_weapon)
 # =========================
 # ACTUALIZAR VIDA

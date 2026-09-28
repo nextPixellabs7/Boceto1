@@ -1,8 +1,4 @@
-extends Node
-# =========================
-# REFERENCIAS
-@onready var player = owner
-@onready var control = get_parent()
+extends State
 # =========================
 # DATOS DEL DODGE
 @export var dodge_speed: float = 600.0

@@ -1,18 +1,16 @@
 extends Node
 # =========================
 # ESTADOS
-enum PlayerState {
-	IDLE,
-	MOVE,
-	ATTACK,
-	DODGE
-}
+enum PlayerState {IDLE,MOVE,ATTACK,DODGE,HURT,DEAD}
 @onready var states := {
 	PlayerState.IDLE: $Idle,
 	PlayerState.MOVE: $Move,
 	PlayerState.ATTACK: $Attack,
 	PlayerState.DODGE: $Dodge,
+	PlayerState.HURT: $Hurt,
+	PlayerState.DEAD: $Dead,
 }
+@onready var hurt = $Hurt
 var current_state: PlayerState = PlayerState.IDLE
 var state_locked: bool = false
 # =========================

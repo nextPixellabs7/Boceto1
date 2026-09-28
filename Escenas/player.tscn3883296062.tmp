@@ -9,9 +9,7 @@
 [ext_resource type="Script" uid="uid://dgkryxadoah6b" path="res://scripts/estados/idle.gd" id="7_ohiiw"]
 [ext_resource type="Script" uid="uid://djsrhlb7kdupc" path="res://scripts/estados/move.gd" id="8_knqkl"]
 [ext_resource type="Script" uid="uid://coayuvswl8yw2" path="res://scripts/estados/attack.gd" id="9_ul4kv"]
-[ext_resource type="Script" uid="uid://bgceodpqqonb8" path="res://scripts/estados/hurt.gd" id="9_vwnoe"]
 [ext_resource type="Script" uid="uid://b27wk5c87uo66" path="res://scripts/estados/dodge.gd" id="10_knqkl"]
-[ext_resource type="Script" uid="uid://db4wj67n6ywgi" path="res://scripts/estados/dead.gd" id="10_r84g6"]
 [ext_resource type="Script" uid="uid://cqf1jw6tishqq" path="res://scripts/estados/state.gd" id="11_ul4kv"]
 [ext_resource type="Script" uid="uid://de31qavulm4uv" path="res://scripts/character/health.gd" id="12_oba5i"]
 
@@ -24,33 +22,9 @@ z_index = 2
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_i8vih")
-
-[node name="Health" type="Node" parent="." unique_id=1064962039]
-script = ExtResource("12_oba5i")
-
-[node name="PlayerControl" type="Node" parent="." unique_id=606003259]
-script = ExtResource("6_xlwfv")
-
-[node name="Idle" type="Node" parent="PlayerControl" unique_id=1978497084]
-script = ExtResource("7_ohiiw")
-
-[node name="Move" type="Node" parent="PlayerControl" unique_id=1730643980]
-script = ExtResource("8_knqkl")
-
-[node name="Attack" type="Node" parent="PlayerControl" unique_id=26582564]
-script = ExtResource("9_ul4kv")
-
-[node name="Dodge" type="Node" parent="PlayerControl" unique_id=716311629]
-script = ExtResource("10_knqkl")
-
-[node name="State" type="Node" parent="PlayerControl" unique_id=329997133]
-script = ExtResource("11_ul4kv")
-
-[node name="Hurt" type="Node" parent="PlayerControl" unique_id=1040345113]
-script = ExtResource("9_vwnoe")
-
-[node name="Dead" type="Node" parent="PlayerControl" unique_id=982656987]
-script = ExtResource("10_r84g6")
+speed = null
+max_health = null
+combo_time = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1676594021]
 scale = Vector2(0.5859375, 1)
@@ -71,3 +45,26 @@ visible = false
 
 [node name="Axe" parent="AttackHitbox" unique_id=1818565763 instance=ExtResource("5_xlwfv")]
 visible = false
+
+[node name="PlayerControl" type="Node" parent="." unique_id=606003259]
+script = ExtResource("6_xlwfv")
+
+[node name="Idle" type="Node" parent="PlayerControl" unique_id=1978497084]
+script = ExtResource("7_ohiiw")
+
+[node name="Move" type="Node" parent="PlayerControl" unique_id=1730643980]
+script = ExtResource("8_knqkl")
+
+[node name="Attack" type="Node" parent="PlayerControl" unique_id=26582564]
+script = ExtResource("9_ul4kv")
+
+[node name="Dodge" type="Node" parent="PlayerControl" unique_id=716311629]
+script = ExtResource("10_knqkl")
+
+[node name="State" type="Node" parent="PlayerControl" unique_id=329997133]
+script = ExtResource("11_ul4kv")
+
+[node name="Hurt" type="Node" parent="PlayerControl" unique_id=1040345113]
+
+[node name="Health" type="Node" parent="." unique_id=1064962039]
+script = ExtResource("12_oba5i")

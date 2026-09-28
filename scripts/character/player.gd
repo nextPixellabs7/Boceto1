@@ -1,7 +1,7 @@
 extends CharacterBody2D
+
 # =========================
 # SEÑALES
-signal health_changed(current: int, maximum: int)
 signal weapon_changed(weapon_name: String)
 # =========================
 # MOVIMIENTO
@@ -20,8 +20,7 @@ signal weapon_changed(weapon_name: String)
 var current_weapon: String = "sword"
 # =========================
 # VIDA
-@export var max_health: int = 100
-var health: int
+@onready var health: Health = $Health
 # =========================
 # COMBOS
 var combo_step: int = 0
@@ -34,22 +33,21 @@ var is_dodging: bool = false
 # INICIO
 func _ready() -> void:
 	add_to_group("player")
-	health = max_health
-	health_changed.emit(health, max_health)
-	_equipWeapon("sword")
+	health.died.connect(_on_died)
+	health.changed.emit(health.current, health.max_health)
+	_equip_weapon("sword")
 # =========================
 # FÍSICA
 func _physics_process(delta: float) -> void:
 	# Estado actual (movimiento, ataque, dodge)
 	player_control._physics_update(delta)
 	move_and_slide()
-
 	# Dirección del ataque
 	var mouse_direction := global_position.direction_to(
 		get_global_mouse_position())
 	attack_pivot.global_position = (
 		global_position
-		+ mouse_direction * _getAttackDistance())
+		+ mouse_direction * _get_attack_distance())
 	attack_pivot.global_rotation = mouse_direction.angle()
 
 	# Temporizador del combo
@@ -61,37 +59,43 @@ func _physics_process(delta: float) -> void:
 	# Cambiar arma (no mientras se ataca o esquiva)
 	if not player_control.state_locked:
 		if Input.is_action_just_pressed("weapon_sword"):
-			_equipWeapon("sword")
+			_equip_weapon("sword")
 		elif Input.is_action_just_pressed("weapon_dagger"):
-			_equipWeapon("dagger")
+			_equip_weapon("dagger")
 		elif Input.is_action_just_pressed("weapon_axe"):
-			_equipWeapon("axe")
+			_equip_weapon("axe")
 # =========================
 # EQUIPAR ARMA
-func _equipWeapon(weapon_name: String) -> void:
+func _equip_weapon(weapon_name: String) -> void:
 	current_weapon = weapon_name
 	for key in weapons:
 		weapons[key].visible = (key == weapon_name)
 	combo_step = 0
 	combo_timer = 0
 	weapon_changed.emit(weapon_name)
-# =========================
+# ========================
 # DISTANCIA DEL ATAQUE
-func _getAttackDistance() -> float:
+func _get_attack_distance() -> float:
 	return weapons[current_weapon].attack_distance
 # =========================
 # RECIBIR DAÑO
-func _takedamage(damage: int) -> void:
-	if is_dodging:
-		print("DODGE - DAÑO EVITADO")
+func _take_damage(damage: int, source_position: Vector2 = Vector2.INF) -> void:
+	var state = player_control.current_state
+	var states = player_control.PlayerState
+
+	# Sin daño durante dodge, herido (frames de invulnerabilidad) o muerto
+	if is_dodging or state == states.HURT or state == states.DEAD:
 		return
-	health = max(health - damage, 0)
-	health_changed.emit(health, max_health)
-	print("PLAYER RECIBIÓ DAÑO: ", damage, " | VIDA: ", health)
-	if health <= 0:
-		_die()
+
+	health._takedamage(damage)
+	print("PLAYER RECIBIÓ DAÑO: ", damage, " | VIDA: ", health.current)
+
+	if health.current == 0:
+		return  # _on_died se encarga
+
+	player_control.hurt._set_knockback(source_position)
+	player_control._change_state(states.HURT)
 # =========================
 # MUERTE
-func _die() -> void:
-	print("PLAYER MUERTO")
-	set_physics_process(false)
+func _on_died() -> void:
+	player_control._change_state(player_control.PlayerState.DEAD)
