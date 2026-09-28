@@ -2,7 +2,7 @@ extends State
 
 # =========================
 # DATOS
-@export var hurt_duration: float = 0.25
+@export var hurt_duration: float = 0.5
 @export var knockback_speed: float = 300.0
 
 var _knockback_direction: Vector2 = Vector2.ZERO

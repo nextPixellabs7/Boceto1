@@ -1,7 +1,9 @@
 extends Node
+
 # =========================
 # ESTADOS
-enum PlayerState {IDLE,MOVE,ATTACK,DODGE,HURT,DEAD}
+enum PlayerState { IDLE, MOVE, ATTACK, DODGE, HURT, DEAD }
+
 @onready var states := {
 	PlayerState.IDLE: $Idle,
 	PlayerState.MOVE: $Move,
@@ -10,9 +12,11 @@ enum PlayerState {IDLE,MOVE,ATTACK,DODGE,HURT,DEAD}
 	PlayerState.HURT: $Hurt,
 	PlayerState.DEAD: $Dead,
 }
+
 @onready var hurt = $Hurt
 var current_state: PlayerState = PlayerState.IDLE
 var state_locked: bool = false
+
 # =========================
 # MOVIMIENTO
 func _get_movement_direction() -> Vector2:
@@ -22,13 +26,15 @@ func _get_movement_direction() -> Vector2:
 		"move_up",
 		"move_down"
 	)
+
 # =========================
-# ACTUALIZAR (se llama cada frame desde el Player)
+# ACTUALIZAR
 func _physics_update(delta: float) -> void:
 	var direction := _get_movement_direction()
 	if not state_locked:
 		_choose_state(direction)
 	states[current_state]._physics_update(direction, delta)
+
 # =========================
 # ELEGIR ESTADO
 func _choose_state(direction: Vector2) -> void:
@@ -40,6 +46,7 @@ func _choose_state(direction: Vector2) -> void:
 		_change_state(PlayerState.IDLE)
 	else:
 		_change_state(PlayerState.MOVE)
+
 # =========================
 # CAMBIAR ESTADO
 func _change_state(new_state: PlayerState) -> void:
@@ -47,9 +54,18 @@ func _change_state(new_state: PlayerState) -> void:
 		return
 	states[current_state]._exit()
 	current_state = new_state
+	
+	if new_state == PlayerState.HURT or new_state == PlayerState.DEAD:
+		state_locked = true
+		
 	states[current_state]._enter()
+
 # =========================
-# DESBLOQUEAR (lo llaman Attack y Dodge al terminar)
+# DESBLOQUEAR
 func _unlock() -> void:
 	state_locked = false
-	_change_state(PlayerState.IDLE)
+	var direction := _get_movement_direction()
+	if direction.is_zero_approx():
+		_change_state(PlayerState.IDLE)
+	else:
+		_change_state(PlayerState.MOVE)
