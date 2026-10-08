@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://jqrh11ee4e4t"]
 
 [ext_resource type="PackedScene" uid="uid://cs5uds4lseofy" path="res://Escenas/player.tscn" id="1_6lbni"]
-[ext_resource type="Script" uid="uid://bqwhddhjl67wt" path="res://scripts/character/ui.gd" id="3_0kh0y"]
+[ext_resource type="Script" uid="uid://bqwhddhjl67wt" path="res://Scripts/character/ui.gd" id="3_0kh0y"]
 [ext_resource type="PackedScene" uid="uid://tigkc1gdq6f1" path="res://Escenas/dummy.tscn" id="48_3xwt8"]
 
 [node name="main" type="Node2D" unique_id=87351606]
@@ -13,9 +13,6 @@ z_index = 5
 
 [node name="Dummy" parent="." unique_id=459626527 instance=ExtResource("48_3xwt8")]
 position = Vector2(269, 31)
-
-[node name="Dummy2" parent="." unique_id=1355668876 instance=ExtResource("48_3xwt8")]
-position = Vector2(266, -197)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1910236589]
 script = ExtResource("3_0kh0y")
