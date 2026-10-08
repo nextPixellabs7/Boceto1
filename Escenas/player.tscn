@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://cs5uds4lseofy"]
+
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="1_cnkc8"]
+[ext_resource type="Script" uid="uid://cyehe25mdpfl3" path="res://scripts/character/player.gd" id="1_i8vih"]
+[ext_resource type="PackedScene" uid="uid://dkrbg3mofhpva" path="res://Escenas/armas/Dagger.tscn" id="3_cgfde"]
+[ext_resource type="PackedScene" uid="uid://d233kk0dbqijt" path="res://Escenas/armas/Sword.tscn" id="3_qgqwx"]
+[ext_resource type="PackedScene" uid="uid://dflmiuqn1ft06" path="res://Escenas/armas/Axe.tscn" id="5_xlwfv"]
+[ext_resource type="Script" uid="uid://ceah4i3tryg4r" path="res://scripts/estados/PlayerControl.gd" id="6_xlwfv"]
+[ext_resource type="Script" uid="uid://dgkryxadoah6b" path="res://scripts/estados/idle.gd" id="7_ohiiw"]
+[ext_resource type="Script" uid="uid://djsrhlb7kdupc" path="res://scripts/estados/move.gd" id="8_knqkl"]
+[ext_resource type="Script" uid="uid://coayuvswl8yw2" path="res://scripts/estados/attack.gd" id="9_ul4kv"]
+[ext_resource type="Script" uid="uid://bgceodpqqonb8" path="res://scripts/estados/hurt.gd" id="9_vwnoe"]
+[ext_resource type="Script" uid="uid://b27wk5c87uo66" path="res://scripts/estados/dodge.gd" id="10_knqkl"]
+[ext_resource type="Script" uid="uid://db4wj67n6ywgi" path="res://scripts/estados/dead.gd" id="10_r84g6"]
+[ext_resource type="Script" uid="uid://cqf1jw6tishqq" path="res://scripts/estados/state.gd" id="11_ul4kv"]
+[ext_resource type="Script" uid="uid://de31qavulm4uv" path="res://scripts/character/health.gd" id="12_oba5i"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8vih"]
+radius = 36.0
+height = 126.0
+
+[node name="Player" type="CharacterBody2D" unique_id=2052637104]
+z_index = 2
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_i8vih")
+
+[node name="Health" type="Node" parent="." unique_id=1064962039]
+script = ExtResource("12_oba5i")
+
+[node name="PlayerControl" type="Node" parent="." unique_id=606003259]
+script = ExtResource("6_xlwfv")
+
+[node name="Idle" type="Node" parent="PlayerControl" unique_id=1978497084]
+script = ExtResource("7_ohiiw")
+
+[node name="Move" type="Node" parent="PlayerControl" unique_id=1730643980]
+script = ExtResource("8_knqkl")
+
+[node name="Attack" type="Node" parent="PlayerControl" unique_id=26582564]
+script = ExtResource("9_ul4kv")
+
+[node name="Dodge" type="Node" parent="PlayerControl" unique_id=716311629]
+script = ExtResource("10_knqkl")
+
+[node name="State" type="Node" parent="PlayerControl" unique_id=329997133]
+script = ExtResource("11_ul4kv")
+
+[node name="Hurt" type="Node" parent="PlayerControl" unique_id=1040345113]
+script = ExtResource("9_vwnoe")
+
+[node name="Dead" type="Node" parent="PlayerControl" unique_id=982656987]
+script = ExtResource("10_r84g6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1676594021]
+scale = Vector2(0.5859375, 1)
+texture = ExtResource("1_cnkc8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1425240556]
+shape = SubResource("CapsuleShape2D_i8vih")
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=1614106229]
+z_index = 2
+collision_layer = 2
+collision_mask = 255
+
+[node name="Dagger" parent="AttackHitbox" unique_id=714303598 instance=ExtResource("3_cgfde")]
+visible = false
+
+[node name="Sword" parent="AttackHitbox" unique_id=184923858 instance=ExtResource("3_qgqwx")]
+
+[node name="Axe" parent="AttackHitbox" unique_id=1818565763 instance=ExtResource("5_xlwfv")]
+visible = false
