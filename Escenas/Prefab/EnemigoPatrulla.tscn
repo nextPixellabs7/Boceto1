@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccck5wmds01aw"]
 
-[ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/EnemigoBase.tscn" id="1_rgarq"]
+[ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/Prefab/EnemigoBase.tscn" id="1_rgarq"]
 
 [sub_resource type="Curve2D" id="Curve2D_rgarq"]
 _data = {

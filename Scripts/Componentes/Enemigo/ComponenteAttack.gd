@@ -12,5 +12,5 @@ func _doDamage(body: CharacterBody2D) -> void:
 	body._takeDamage(damage)
 	timer = cooldown
 	
-func _checkCD() -> float:
+func _checkCD() -> bool:
 	return timer <= 0.0

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="2_nxnwl"]
 [ext_resource type="Script" uid="uid://dm7dje3kuyfkl" path="res://Scripts/Componentes/Enemigo/ComponenteVision.gd" id="3_nqetu"]
 [ext_resource type="Script" uid="uid://ttwqkpjsnpuo" path="res://Scripts/Componentes/Enemigo/ComponenteDeteccion.gd" id="4_a08p1"]
-[ext_resource type="Script" uid="uid://dqwxsmfckp2io" path="res://Scripts/EnemigoController.gd" id="5_nqetu"]
+[ext_resource type="Script" uid="uid://dqwxsmfckp2io" path="res://Scripts/Componentes/Enemigo/EnemigoController.gd" id="5_nqetu"]
 [ext_resource type="Script" uid="uid://bsyn5lh6tvxgm" path="res://Scripts/Componentes/Enemigo/ComponenteMovimiento.gd" id="6_a08p1"]
 [ext_resource type="Script" uid="uid://t6cdldy6gfxl" path="res://Scripts/Componentes/Enemigo/ComponenteAttack.gd" id="7_grtof"]
 

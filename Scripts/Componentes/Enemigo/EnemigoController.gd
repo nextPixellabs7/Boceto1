@@ -42,10 +42,8 @@ func _physics_process(delta: float) -> void:
 		if not caminando:
 			if vision_component.player == null:
 				estado_actual = STATE.idle
-				print("Ok, a esta distancia estoy joya")
 			else:
 				estado_actual = STATE.atacando
-				print("Te wa a pegar >:v")
 	elif estado_actual == STATE.atacando:
 		
 		var direccion = pivote.global_position.direction_to(ultima_posicion_conocida)
@@ -54,10 +52,10 @@ func _physics_process(delta: float) -> void:
 		var caminando = movimiento_component._move(ultima_posicion_conocida)
 
 		if caminando:
-			print("Perate tantito")
 			estado_actual = STATE.persiguiendo
 		else:
 			if ataque_component._checkCD() and vision_component.player != null:
+				
 				
 				var distancia_real = global_position.distance_to(vision_component.player.global_position)
 				if distancia_real <= movimiento_component.distancia_max + 10.0:
@@ -83,10 +81,9 @@ func _look(sonido: Node2D) -> void:
 	
 	if estado_actual != STATE.mirando:
 		estado_actual = STATE.mirando
-		print("¡Escuché algo!")
 
 func _lookAtPlayer(player: CharacterBody2D) -> void:
 	ultima_posicion_conocida = player.global_position
 	
-	if estado_actual == STATE.idle or STATE.mirando:
+	if estado_actual == STATE.idle or estado_actual == STATE.mirando:
 		estado_actual = STATE.persiguiendo

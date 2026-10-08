@@ -18,7 +18,6 @@ func _move(destino: Vector2) -> bool:
 	
 	nav_agent.target_position = destino
 	var distancia = body.global_position.distance_to(destino)
-	#var direccion = body.global_position.direction_to(destino)
 	
 	if distancia >= distancia_max:
 		

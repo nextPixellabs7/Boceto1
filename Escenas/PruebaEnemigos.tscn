@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dp40u5m21yods"]
 
-[ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/EnemigoBase.tscn" id="1_xbkjb"]
+[ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/Prefab/EnemigoBase.tscn" id="1_xbkjb"]
 [ext_resource type="Script" uid="uid://dtiuquxs40il8" path="res://Scripts/Personajeprueba.gd" id="2_yg8uy"]
 [ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="3_2alje"]
 

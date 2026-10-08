@@ -29,9 +29,6 @@ func _physics_process(delta: float) -> void:
 		if tarjet is Player:
 			jugador_detectado.emit(player)
 			pass
-	
-	#if _seen(player):
-		#jugador_detectado.emit(player)
 
 func _look(body: Node2D) -> void:
 	mirar.emit(body)
@@ -50,28 +47,3 @@ func _on_timer_timeout() -> void:
 	
 	if not encontrados:
 		player = null
-
-"""
-func _seen(body : CharacterBody2D) -> bool:
-	
-	var direccion = global_position.direction_to(player.global_position)
-	
-	var hombros = direccion.orthogonal() * 16
-
-	raycasts[0].target_position = to_local(player.global_position - hombros)
-	raycasts[1].target_position = to_local(player.global_position)
-	raycasts[2].target_position = to_local(player.global_position + hombros)
-	
-	raycasts[0].look_at(player.global_position - hombros)
-	raycasts[1].look_at(player.global_position)
-	raycasts[2].look_at(player.global_position + hombros)
-	
-	for raycast: RayCast2D in raycasts:
-		
-		raycast.force_raycast_update()
-		
-		if raycast.is_colliding():
-			if raycast.get_collider() is Player:
-				return true
-	return false
-"""
