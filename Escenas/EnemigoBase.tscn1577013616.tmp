@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bbr4adv7sj8fb"]
+
+[ext_resource type="Script" uid="uid://cw7uhpgmxi1rx" path="res://Scripts/Componentes/Enemigo/ComponenteVida.gd" id="2_d64cs"]
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="2_nxnwl"]
+[ext_resource type="Script" uid="uid://dm7dje3kuyfkl" path="res://Scripts/Componentes/Enemigo/ComponenteVision.gd" id="3_nqetu"]
+[ext_resource type="Script" uid="uid://ttwqkpjsnpuo" path="res://Scripts/Componentes/Enemigo/ComponenteDeteccion.gd" id="4_a08p1"]
+[ext_resource type="Script" uid="uid://dqwxsmfckp2io" path="res://Scripts/EnemigoController.gd" id="5_nqetu"]
+[ext_resource type="Script" uid="uid://bsyn5lh6tvxgm" path="res://Scripts/Componentes/Enemigo/ComponenteMovimiento.gd" id="6_a08p1"]
+[ext_resource type="Script" uid="uid://t6cdldy6gfxl" path="res://Scripts/Componentes/Enemigo/ComponenteAttack.gd" id="7_grtof"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jv1ba"]
+radius = 67.0
+height = 142.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nqetu"]
+radius = 916.05457
+
+[node name="Enemigo base" type="CharacterBody2D" unique_id=1649633278 node_paths=PackedStringArray("vida_component", "vision_component", "deteccion_component", "movimiento_component", "pivote")]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("5_nqetu")
+vida_component = NodePath("Componentes/HealthComponent")
+vision_component = NodePath("Componentes/VisionComponent")
+deteccion_component = NodePath("Componentes/DetectionComponent")
+movimiento_component = NodePath("Componentes/MovementComponent")
+pivote = NodePath("Pivote")
+
+[node name="Colision enemigo" type="CollisionShape2D" parent="." unique_id=1312258938]
+shape = SubResource("CapsuleShape2D_jv1ba")
+debug_color = Color(0.9742381, 0.116502695, 0.28967178, 0.41960785)
+
+[node name="Entorno" type="Area2D" parent="." unique_id=192538688]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entorno" unique_id=1491996371]
+shape = SubResource("CircleShape2D_nqetu")
+
+[node name="Pivote" type="Node2D" parent="." unique_id=2070832905]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivote" unique_id=1139268276]
+modulate = Color(1, 0.08235294, 0, 1)
+texture = ExtResource("2_nxnwl")
+
+[node name="Cono" type="Area2D" parent="Pivote" unique_id=2014044380]
+rotation = -1.5706835
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pivote/Cono" unique_id=223523535]
+build_mode = 1
+polygon = PackedVector2Array(-440.91898, 718.04974, 0, 833.996, 440.919, 706.95, 0, 0)
+
+[node name="RayCast2D" type="RayCast2D" parent="Pivote/Cono" unique_id=673101774]
+rotation = 1.5706835
+target_position = Vector2(858, 2)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Pivote/Cono" unique_id=2083852740]
+rotation = 1.5706835
+target_position = Vector2(716, 440)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Pivote/Cono" unique_id=1575315547]
+rotation = 1.5706835
+target_position = Vector2(703, -431)
+
+[node name="Componentes" type="Node" parent="." unique_id=559070089]
+
+[node name="HealthComponent" type="Node2D" parent="Componentes" unique_id=2114233897]
+script = ExtResource("2_d64cs")
+metadata/_custom_type_script = "uid://cw7uhpgmxi1rx"
+
+[node name="DetectionComponent" type="Node2D" parent="Componentes" unique_id=178263749]
+script = ExtResource("4_a08p1")
+metadata/_custom_type_script = "uid://ttwqkpjsnpuo"
+
+[node name="VisionComponent" type="Node2D" parent="Componentes" unique_id=171599757 node_paths=PackedStringArray("raycasts")]
+script = ExtResource("3_nqetu")
+raycasts = [NodePath("../../Pivote/Cono/RayCast2D"), NodePath("../../Pivote/Cono/RayCast2D2"), NodePath("../../Pivote/Cono/RayCast2D3")]
+metadata/_custom_type_script = "uid://dm7dje3kuyfkl"
+
+[node name="MovementComponent" type="Node2D" parent="Componentes" unique_id=972120224 node_paths=PackedStringArray("body")]
+script = ExtResource("6_a08p1")
+body = NodePath("../..")
+metadata/_custom_type_script = "uid://bsyn5lh6tvxgm"
+
+[node name="AttackComponent" type="Node2D" parent="Componentes" unique_id=1000096120]
+script = ExtResource("7_grtof")
+metadata/_custom_type_script = "uid://t6cdldy6gfxl"
+
+[connection signal="body_entered" from="Entorno" to="Componentes/DetectionComponent" method="_on_entorno_body_entered"]
+[connection signal="body_exited" from="Entorno" to="Componentes/DetectionComponent" method="_on_entorno_body_exited"]
+[connection signal="body_entered" from="Pivote/Cono" to="Componentes/VisionComponent" method="_on_vision_body_entered"]
+[connection signal="body_exited" from="Pivote/Cono" to="Componentes/VisionComponent" method="_on_vision_body_exited"]

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ccck5wmds01aw"]
+
+[ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/Prefab/EnemigoBase.tscn" id="1_rgarq"]
+
+[sub_resource type="Curve2D" id="Curve2D_rgarq"]
+_data = {
+"points": PackedVector2Array(-81.07, -141.57, 81.07, 141.57, 486, 52, 193.06398, -194.46878, -193.06398, 194.46878, 674, 375, 175.54561, 91.79908, -175.54561, -91.79908, -614, 607, -107.90418, 72.47296, 107.90418, -72.47296, -779, -285, -102.93012, 74.38016, 102.93012, -74.38016, -115, 7, -181.76137, 2.3691826, 181.76137, -2.3691826, 203, -592, -71.39, -133.1, 71.39, 133.1, 486, 52)
+}
+point_count = 7
+
+[node name="Node2D" type="Node2D" unique_id=2135933568]
+
+[node name="Path2D" type="Path2D" parent="." unique_id=1792726082]
+curve = SubResource("Curve2D_rgarq")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=1808258275]
+position = Vector2(486, 52)
+rotation = 1.0507302
+
+[node name="Enemigo base" parent="Path2D/PathFollow2D" unique_id=1649633278 instance=ExtResource("1_rgarq")]
