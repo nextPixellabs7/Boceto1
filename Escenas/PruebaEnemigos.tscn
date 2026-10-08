@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="3_2alje"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jv1ba"]
-radius = 67.0
-height = 164.0
+radius = 61.0
+height = 122.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jv1ba"]
 radius = 77.10383
@@ -23,7 +23,7 @@ size = Vector2(0.9879999, 0.97356856)
 [node name="Prueba" type="Node2D" unique_id=1908379066]
 
 [node name="Enemigo base" parent="." unique_id=1649633278 instance=ExtResource("1_xbkjb")]
-position = Vector2(853, -3)
+position = Vector2(1450, -22)
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1009882557]
 slide_on_ceiling = false
@@ -31,10 +31,10 @@ floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("2_yg8uy")
 
-[node name="Player" type="CollisionShape2D" parent="Player" unique_id=1205636202]
+[node name="Collision" type="CollisionShape2D" parent="Player" unique_id=1205636202]
 shape = SubResource("CapsuleShape2D_jv1ba")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player/Player" unique_id=1709072587]
+[node name="Sprite2D" type="Sprite2D" parent="Player/Collision" unique_id=1709072587]
 texture = ExtResource("3_2alje")
 
 [node name="Area2D" type="Area2D" parent="Player" unique_id=1948423907]
@@ -50,8 +50,8 @@ zoom = Vector2(0.605, 0.605)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1117787286]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(655.875, 153.125)
-scale = Vector2(393.7499, 165.75)
+position = Vector2(742, 210)
+scale = Vector2(165.74994, 165.75)
 mesh = SubResource("BoxMesh_ew6px")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D" unique_id=989887802]

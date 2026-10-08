@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://da2mgpi2xqgfp"]
+
+[ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/EnemigoBase.tscn" id="1_cbc5u"]
+[ext_resource type="Script" uid="uid://dtiuquxs40il8" path="res://Scripts/Personajeprueba.gd" id="2_77x8v"]
+[ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="3_y4ew6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_du6er"]
+radius = 61.0
+height = 122.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3q1h6"]
+radius = 77.10383
+
+[node name="Prueba1" type="Node2D" unique_id=137552723]
+
+[node name="Enemigo base" parent="." unique_id=1649633278 instance=ExtResource("1_cbc5u")]
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=682523120]
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("2_77x8v")
+
+[node name="Collision" type="CollisionShape2D" parent="Player" unique_id=2037822739]
+shape = SubResource("CapsuleShape2D_du6er")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Collision" unique_id=1490337647]
+texture = ExtResource("3_y4ew6")
+
+[node name="Area2D" type="Area2D" parent="Player" unique_id=620444020]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=1202388013]
+position = Vector2(125, -2)
+shape = SubResource("CircleShape2D_3q1h6")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=220103740]
+position = Vector2(1, -5)
+scale = Vector2(1, 2.1999998)
+zoom = Vector2(0.605, 0.605)

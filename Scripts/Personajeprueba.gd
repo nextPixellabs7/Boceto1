@@ -1,9 +1,10 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @onready var areaAtaque = $Area2D
 
 const SPEED = 300.0
 
+var vida := 20
 
 func _physics_process(delta: float) -> void:
 
@@ -22,14 +23,22 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("ui_accept"):
 		_doDamage()
-
 	move_and_slide()
+	
 func _doDamage() -> void:
 	
 	var enemy = areaAtaque.get_overlapping_bodies()
-	
 	for enemigos in enemy:
 		if enemigos.has_method("_takeDamage"):
 			if enemigos != self:
 				enemigos._takeDamage(5)
-				print("Le pegaste al enemigo : %s de vida" % [enemigos.vida])
+				print("Le pegaste al enemigo : %s de vida" % [enemigos.vida_component.vida])
+
+func _takeDamage(dmg: float) -> void:
+	vida -= dmg
+	
+	print("Ouch!, me queda ", vida, " de vida")
+	
+	if vida <= 0:
+		queue_free()
+	

@@ -15,13 +15,7 @@ height = 142.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_nqetu"]
 radius = 916.05457
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jv1ba"]
-radius = 500.004
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_grtof"]
-size = Vector2(368, 170)
-
-[node name="Enemigo base" type="CharacterBody2D" unique_id=1649633278 node_paths=PackedStringArray("vida_component", "vision_component", "deteccion_component", "movimiento_component", "ataque_component", "pivote")]
+[node name="Enemigo base" type="CharacterBody2D" unique_id=1649633278 node_paths=PackedStringArray("vida_component", "vision_component", "deteccion_component", "movimiento_component", "pivote")]
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("5_nqetu")
@@ -29,7 +23,6 @@ vida_component = NodePath("Componentes/HealthComponent")
 vision_component = NodePath("Componentes/VisionComponent")
 deteccion_component = NodePath("Componentes/DetectionComponent")
 movimiento_component = NodePath("Componentes/MovementComponent")
-ataque_component = NodePath("Componentes/AttackComponent")
 pivote = NodePath("Pivote")
 
 [node name="Colision enemigo" type="CollisionShape2D" parent="." unique_id=1312258938]
@@ -41,28 +34,30 @@ debug_color = Color(0.9742381, 0.116502695, 0.28967178, 0.41960785)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entorno" unique_id=1491996371]
 shape = SubResource("CircleShape2D_nqetu")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1139268276]
+[node name="Pivote" type="Node2D" parent="." unique_id=2070832905]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivote" unique_id=1139268276]
 modulate = Color(1, 0.08235294, 0, 1)
 texture = ExtResource("2_nxnwl")
-
-[node name="Pivote" type="Node2D" parent="." unique_id=2070832905]
 
 [node name="Cono" type="Area2D" parent="Pivote" unique_id=2014044380]
 rotation = -1.5706835
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivote/Cono" unique_id=1310749802]
-position = Vector2(-4.950347, 440.00055)
-shape = SubResource("CircleShape2D_jv1ba")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pivote/Cono" unique_id=223523535]
+build_mode = 1
+polygon = PackedVector2Array(-440.91898, 718.04974, 0, 833.996, 440.919, 706.95, 0, 0)
 
-[node name="Ataque" type="Area2D" parent="Pivote" unique_id=526346753]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivote/Ataque" unique_id=1627386876]
-position = Vector2(174, -5)
-shape = SubResource("RectangleShape2D_grtof")
-
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=673101774]
+[node name="RayCast2D" type="RayCast2D" parent="Pivote/Cono" unique_id=673101774]
+rotation = 1.5706835
 target_position = Vector2(858, 2)
-hit_from_inside = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="Pivote/Cono" unique_id=2083852740]
+rotation = 1.5706835
+target_position = Vector2(716, 440)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Pivote/Cono" unique_id=1575315547]
+rotation = 1.5706835
+target_position = Vector2(703, -431)
 
 [node name="Componentes" type="Node" parent="." unique_id=559070089]
 
@@ -74,10 +69,9 @@ metadata/_custom_type_script = "uid://cw7uhpgmxi1rx"
 script = ExtResource("4_a08p1")
 metadata/_custom_type_script = "uid://ttwqkpjsnpuo"
 
-[node name="VisionComponent" type="Node2D" parent="Componentes" unique_id=171599757 node_paths=PackedStringArray("conoVision", "raycast")]
+[node name="VisionComponent" type="Node2D" parent="Componentes" unique_id=171599757 node_paths=PackedStringArray("raycasts")]
 script = ExtResource("3_nqetu")
-conoVision = NodePath("../../Pivote/Cono")
-raycast = NodePath("../../RayCast2D")
+raycasts = [NodePath("../../Pivote/Cono/RayCast2D"), NodePath("../../Pivote/Cono/RayCast2D2"), NodePath("../../Pivote/Cono/RayCast2D3")]
 metadata/_custom_type_script = "uid://dm7dje3kuyfkl"
 
 [node name="MovementComponent" type="Node2D" parent="Componentes" unique_id=972120224 node_paths=PackedStringArray("body")]
@@ -89,10 +83,7 @@ metadata/_custom_type_script = "uid://bsyn5lh6tvxgm"
 script = ExtResource("7_grtof")
 metadata/_custom_type_script = "uid://t6cdldy6gfxl"
 
-[node name="Timer" type="Timer" parent="." unique_id=32573552]
-wait_time = 0.2
-autostart = true
-
 [connection signal="body_entered" from="Entorno" to="Componentes/DetectionComponent" method="_on_entorno_body_entered"]
 [connection signal="body_exited" from="Entorno" to="Componentes/DetectionComponent" method="_on_entorno_body_exited"]
-[connection signal="timeout" from="Timer" to="Componentes/VisionComponent" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Pivote/Cono" to="Componentes/VisionComponent" method="_on_vision_body_entered"]
+[connection signal="body_exited" from="Pivote/Cono" to="Componentes/VisionComponent" method="_on_vision_body_exited"]
