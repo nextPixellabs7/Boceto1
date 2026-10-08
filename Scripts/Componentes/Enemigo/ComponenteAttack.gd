@@ -1,7 +1,7 @@
 class_name AttackComponent extends Node2D
 
 @export var damage := 5
-@export var cooldown := 2
+@export var cooldown := 3
 var timer := 0.0
 
 func _physics_process(delta: float) -> void:

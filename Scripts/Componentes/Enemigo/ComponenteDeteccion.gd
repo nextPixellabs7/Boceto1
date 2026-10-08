@@ -1,6 +1,6 @@
 class_name DetectionComponent extends Node2D
 
-signal sonido(body: Node2D, velocidad: float)
+signal sonido(body: Node2D)
 
 var player: CharacterBody2D = null
 var near: bool = false
@@ -14,7 +14,7 @@ func _checkPlayer() -> void:
 func _on_entorno_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player = body
-		sonido.emit(body, velocidad_giro)
+		sonido.emit(body)
 
 
 func _on_entorno_body_exited(body: Node2D) -> void:

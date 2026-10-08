@@ -20,6 +20,13 @@ material = SubResource("StandardMaterial3D_yj86u")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ieep"]
 size = Vector2(0.9879999, 0.97356856)
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xbkjb"]
+vertices = PackedVector2Array(650.1172, 119.3125, 363.85938, -274.71875, 1619.1172, -581.3125, 1802.8828, -581.3125, 833.8828, 119.3125, 2266.8828, 766.3594, 1238.25, 766.3594, 833.8828, 300.6875, 2266.8828, 1171.7734, 2819.0234, 1570.8203, -1302.3672, 1499.1797, 1238.25, 1171.7734, 424.8828, 994.6875, 241.11719, 994.6875, 1802.8828, -762.6875, 2824.9688, -1339.0234, -1125.6016, -1349.9688, 1619.1172, -762.6875, 363.85938, -863.15625, 241.11719, 813.3125, 12.0234375, -274.71875, 12.0234375, -863.15625, 424.8828, 813.3125, 650.1172, 300.6875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 4, 3), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(11, 10, 12, 6), PackedInt32Array(13, 12, 10), PackedInt32Array(3, 14, 15, 9, 5), PackedInt32Array(16, 15, 14, 17, 18), PackedInt32Array(19, 13, 10, 16, 20), PackedInt32Array(2, 1, 18, 17), PackedInt32Array(16, 18, 21), PackedInt32Array(7, 6, 12, 22, 23), PackedInt32Array(16, 21, 20), PackedInt32Array(23, 22, 19, 20, 1, 0), PackedInt32Array(5, 9, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1135, -1360, 2835, -1349, 2829, 1581, -1313, 1509)])
+parsed_geometry_type = 1
+source_geometry_mode = 1
+
 [node name="Prueba" type="Node2D" unique_id=1908379066]
 
 [node name="Enemigo base" parent="." unique_id=1649633278 instance=ExtResource("1_xbkjb")]
@@ -48,7 +55,7 @@ position = Vector2(1, -5)
 scale = Vector2(1, 2.1999998)
 zoom = Vector2(0.605, 0.605)
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1117787286]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1117787286 groups=["navigation_polygon_source_geometry_group"]]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(742, 210)
 scale = Vector2(165.74994, 165.75)
@@ -58,3 +65,50 @@ mesh = SubResource("BoxMesh_ew6px")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D/StaticBody2D" unique_id=1437838104]
 shape = SubResource("RectangleShape2D_5ieep")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="." unique_id=1042659992 groups=["navigation_polygon_source_geometry_group"]]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(187.93747, -568.9375)
+scale = Vector2(335.87497, 583.875)
+mesh = SubResource("BoxMesh_ew6px")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D2" unique_id=1593007816]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D2/StaticBody2D" unique_id=839634776]
+shape = SubResource("RectangleShape2D_5ieep")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="." unique_id=1906343962 groups=["navigation_polygon_source_geometry_group"]]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(333, 904)
+scale = Vector2(165.74994, 165.75)
+mesh = SubResource("BoxMesh_ew6px")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D3" unique_id=1814510834]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D3/StaticBody2D" unique_id=419600472]
+shape = SubResource("RectangleShape2D_5ieep")
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="." unique_id=186199702 groups=["navigation_polygon_source_geometry_group"]]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1711, -672)
+scale = Vector2(165.74994, 165.75)
+mesh = SubResource("BoxMesh_ew6px")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D4" unique_id=1180434392]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D4/StaticBody2D" unique_id=1643291722]
+shape = SubResource("RectangleShape2D_5ieep")
+
+[node name="MeshInstance2D5" type="MeshInstance2D" parent="." unique_id=2142397162 groups=["navigation_polygon_source_geometry_group"]]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1752.5625, 969.0625)
+scale = Vector2(1020.8748, 395.87503)
+mesh = SubResource("BoxMesh_ew6px")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D5" unique_id=1272585176]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D5/StaticBody2D" unique_id=287886487]
+shape = SubResource("RectangleShape2D_5ieep")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=974004785 groups=["navigation_polygon_source_geometry_group"]]
+navigation_polygon = SubResource("NavigationPolygon_xbkjb")

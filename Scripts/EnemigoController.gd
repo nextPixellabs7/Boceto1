@@ -11,9 +11,10 @@ class_name EnemyController extends CharacterBody2D
 enum STATE{
 	idle,
 	persiguiendo,
+	mirando,
 	caminando,
 	atacando,
-	patruyando
+	patrullando
 }
 
 var estado_actual = STATE.idle
@@ -27,8 +28,7 @@ func _ready() -> void:
 	
 	vision_component.raycast.add_exception(self)
 	
-	#vision_component.mirar.connect(_look)
-	#deteccion_component.sonido.connect(_look)
+	deteccion_component.sonido.connect(_look)
 
 func _physics_process(delta: float) -> void:
 	
@@ -51,36 +51,42 @@ func _physics_process(delta: float) -> void:
 		var direccion = pivote.global_position.direction_to(ultima_posicion_conocida)
 		var angulo_objetivo = direccion.angle()
 		pivote.global_rotation = lerp_angle(pivote.global_rotation, angulo_objetivo, 10.0 * delta)
-		#pivote.look_at(ultima_posicion_conocida)
 		var caminando = movimiento_component._move(ultima_posicion_conocida)
-		
+
 		if caminando:
 			print("Perate tantito")
 			estado_actual = STATE.persiguiendo
 		else:
 			if ataque_component._checkCD() and vision_component.player != null:
-				ataque_component._doDamage(vision_component.player)
-				print("Le pegaste al jugador ",ataque_component.damage, " de daño")
+				
+				var distancia_real = global_position.distance_to(vision_component.player.global_position)
+				if distancia_real <= movimiento_component.distancia_max + 10.0:
+					ataque_component._doDamage(vision_component.player)
+					print("Le pegaste al jugador ",ataque_component.damage, " de daño")
+				else:
+					estado_actual = STATE.persiguiendo
 
+	elif estado_actual == STATE.mirando:
+		var direccion = pivote.global_position.direction_to(ultima_posicion_conocida)
+		var angulo_objetivo = direccion.angle()
+		pivote.global_rotation = lerp_angle(pivote.global_rotation, angulo_objetivo, 10.0 * delta)
+	
 func _takeDamage(dmg: int) -> void:
 	vida_component._takeDamage(dmg)
 
 func _died() -> void:
 	queue_free()
 
-"""
-func _look(sonido: Node2D, velocidad: float) -> void:
+func _look(sonido: Node2D) -> void:
 	
-	var sonido_posicion = sonido.global_position
-	var angulo_objetivo = pivote.global_position.angle_to_point(sonido_posicion)
-	rotation = lerp_angle(rotation, angulo_objetivo, velocidad * 1)
-	#pivote.look_at(sonido.global_position)
-"""
+	ultima_posicion_conocida = sonido.global_position
+	
+	if estado_actual != STATE.mirando:
+		estado_actual = STATE.mirando
+		print("¡Escuché algo!")
 
 func _lookAtPlayer(player: CharacterBody2D) -> void:
 	ultima_posicion_conocida = player.global_position
 	
-	
-	
-	if estado_actual == STATE.idle:
+	if estado_actual == STATE.idle or STATE.mirando:
 		estado_actual = STATE.persiguiendo
