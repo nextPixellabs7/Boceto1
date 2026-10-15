@@ -21,7 +21,8 @@ radius = 405.04443
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grtof"]
 size = Vector2(368, 170)
 
-[node name="Enemigo base" type="CharacterBody2D" unique_id=1649633278 node_paths=PackedStringArray("vida_component", "vision_component", "deteccion_component", "movimiento_component", "ataque_component", "pivote")]
+[node name="Enemigo estatico" type="CharacterBody2D" unique_id=1649633278 node_paths=PackedStringArray("vida_component", "vision_component", "deteccion_component", "movimiento_component", "ataque_component", "pivote")]
+z_index = 1
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("5_nqetu")

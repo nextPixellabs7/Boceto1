@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 # =========================
@@ -111,6 +112,10 @@ func _take_damage(damage: int, source_position: Vector2 = Vector2.INF) -> void:
 
 	player_control.hurt._set_knockback(source_position)
 	player_control._change_state(states.HURT)
+
+# Alias de compatibilidad por si se llama con camelCase o float:
+func _takeDamage(damage: float, source_position: Vector2 = Vector2.INF) -> void:
+	_take_damage(int(damage), source_position)
 
 # =========================
 # MUERTE
