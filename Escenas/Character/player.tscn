@@ -11,9 +11,9 @@
 [ext_resource type="Script" uid="uid://bgceodpqqonb8" path="res://Scripts/estados/hurt.gd" id="9_g5hcy"]
 [ext_resource type="Script" uid="uid://db4wj67n6ywgi" path="res://Scripts/estados/dead.gd" id="10_l5v2o"]
 [ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="11_d73ns"]
-[ext_resource type="PackedScene" uid="uid://dkrbg3mofhpva" path="res://Escenas/Armas/Dagger.tscn" id="12_34b7m"]
-[ext_resource type="PackedScene" uid="uid://d233kk0dbqijt" path="res://Escenas/Armas/Sword.tscn" id="13_p56kw"]
-[ext_resource type="PackedScene" uid="uid://dflmiuqn1ft06" path="res://Escenas/Armas/Axe.tscn" id="14_5n2os"]
+[ext_resource type="PackedScene" uid="uid://dkrbg3mofhpva" path="res://Escenas/armas/Dagger.tscn" id="12_34b7m"]
+[ext_resource type="PackedScene" uid="uid://d233kk0dbqijt" path="res://Escenas/armas/Sword.tscn" id="13_p56kw"]
+[ext_resource type="PackedScene" uid="uid://dflmiuqn1ft06" path="res://Escenas/armas/Axe.tscn" id="14_5n2os"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i8vih"]
 radius = 36.0

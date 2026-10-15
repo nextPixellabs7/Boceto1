@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dp40u5m21yods"]
 
-[ext_resource type="PackedScene" uid="uid://cs5uds4lseofy" path="res://Escenas/Character/player.tscn" id="1_h6omt"]
+[ext_resource type="PackedScene" uid="uid://cs5uds4lseofy" path="res://Escenas/Character/Player.tscn" id="1_h6omt"]
 [ext_resource type="PackedScene" uid="uid://bbr4adv7sj8fb" path="res://Escenas/Prefab/enemigos/EnemigoBase.tscn" id="2_8rule"]
 [ext_resource type="PackedScene" uid="uid://c8q1m4k8dummy" path="res://Escenas/Prefab/enemigos/EnemigoEstatico.tscn" id="3_8rule"]
 [ext_resource type="PackedScene" uid="uid://dl7kseeokvrs6" path="res://Escenas/Character/UI.tscn" id="3_jkmq6"]
