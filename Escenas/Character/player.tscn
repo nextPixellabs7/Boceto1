@@ -20,8 +20,7 @@ radius = 36.0
 height = 126.0
 
 [node name="Player" type="CharacterBody2D" unique_id=2052637104]
-z_index = 2
-collision_mask = 2
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_pmwa2")
 
