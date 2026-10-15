@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cl54krx62gxun"
-path="res://.godot/imported/Apprentice Dagger.png-73346a486b19cfbd79017b92b1e0215a.ctex"
+path="res://.godot/imported/Apprentice Dagger.png-35aec1d442ef6d6043767b7322725eaa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/free pack 1.1ver/Apprentice Dagger.png"
-dest_files=["res://.godot/imported/Apprentice Dagger.png-73346a486b19cfbd79017b92b1e0215a.ctex"]
+source_file="res://assets/free pack 1.1ver/Apprentice Dagger.png"
+dest_files=["res://.godot/imported/Apprentice Dagger.png-35aec1d442ef6d6043767b7322725eaa.ctex"]
 
 [params]
 
