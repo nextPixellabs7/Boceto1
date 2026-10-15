@@ -1,4 +1,4 @@
-class_name Player extends CharacterBody2D
+extends CharacterBody2D
 
 @onready var areaAtaque = $Area2D
 

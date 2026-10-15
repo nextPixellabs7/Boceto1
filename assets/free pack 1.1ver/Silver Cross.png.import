@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6lauu3xy8v41"
-path="res://.godot/imported/Silver Cross.png-79438dba9f9a9edd249af0fcc47197f0.ctex"
+path="res://.godot/imported/Silver Cross.png-656f27a9ca315ece04abcd0f35ec8945.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/free pack 1.1ver/Silver Cross.png"
-dest_files=["res://.godot/imported/Silver Cross.png-79438dba9f9a9edd249af0fcc47197f0.ctex"]
+source_file="res://Assets/free pack 1.1ver/Silver Cross.png"
+dest_files=["res://.godot/imported/Silver Cross.png-656f27a9ca315ece04abcd0f35ec8945.ctex"]
 
 [params]
 
