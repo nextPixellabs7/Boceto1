@@ -91,7 +91,7 @@ metadata/_custom_type_script = "uid://bsyn5lh6tvxgm"
 script = ExtResource("7_grtof")
 metadata/_custom_type_script = "uid://t6cdldy6gfxl"
 
-[node name="Timer" type="Timer" parent="." unique_id=32573552]
+[node name="Timer Ataque" type="Timer" parent="." unique_id=32573552]
 wait_time = 0.2
 autostart = true
 
@@ -100,4 +100,4 @@ debug_enabled = true
 
 [connection signal="body_entered" from="Entorno" to="Componentes/DetectionComponent" method="_on_entorno_body_entered"]
 [connection signal="body_exited" from="Entorno" to="Componentes/DetectionComponent" method="_on_entorno_body_exited"]
-[connection signal="timeout" from="Timer" to="Componentes/VisionComponent" method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer Ataque" to="Componentes/VisionComponent" method="_on_timer_timeout"]

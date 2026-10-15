@@ -9,8 +9,9 @@ var ultima_posicion: Vector2
 @export var distancia_min : float = 345.0
 @export var distancia_max : float = 350.0
 
-func _move(destino: Vector2) -> bool:
-	
+var siguientePosicion: Vector2
+
+func _move(destino: Vector2, rango_frenado: float) -> bool:
 	
 	if not body or not nav_agent: 
 		print("AYUDA: me falta mi cuerpo o mi Navigation Agent en el inspector")
@@ -19,7 +20,7 @@ func _move(destino: Vector2) -> bool:
 	nav_agent.target_position = destino
 	var distancia = body.global_position.distance_to(destino)
 	
-	if distancia >= distancia_max:
+	if distancia > rango_frenado:
 		
 		var siguiente_paso = nav_agent.get_next_path_position()
 		var direccion = body.global_position.direction_to(siguiente_paso)
@@ -27,7 +28,7 @@ func _move(destino: Vector2) -> bool:
 		body.velocity = direccion * speed
 		body.move_and_slide() 
 		return true 
-	elif distancia <= distancia_min:
+	elif distancia < (rango_frenado - 5.0):
 		var direccion = body.global_position.direction_to(destino)
 		body.velocity = -direccion * speed
 		body.move_and_slide() 
