@@ -3,13 +3,17 @@ extends CharacterBody2D
 @export var max_health := 100.0
 @export var max_stamina := 100.0
 @export var speed := 150.0
-@export var sprint_speed := 260.0
+@export var sprint_speed := 600.0
 @export var stamina_drain_per_sec := 25.0
+@export var stamina_regen_amount := 1.0
+@export var stamina_regen_interval := 2.0
 
 var health: float
 var stamina: float
 var has_key := false
 var is_dead := false
+var stamina_regen_timer := 0.0
+var current_interactable: Node = null   # lo que esté dentro de un área de interacción (ej. la puerta)
 
 func _ready() -> void:
 	add_to_group("player")
@@ -17,10 +21,6 @@ func _ready() -> void:
 	stamina = max_stamina
 
 func _physics_process(delta: float) -> void:
-	# Esto es lo que deja al personaje estático al morir: mientras is_dead
-	# sea true, la velocidad se fuerza a cero cada frame y el "return"
-	# corta la función antes de leer el input. Queda comentado para que,
-	# en esta zona de pruebas, sigas moviéndote después de "morir".
 	if is_dead:
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -34,8 +34,26 @@ func _physics_process(delta: float) -> void:
 		current_speed = sprint_speed
 		stamina = clampf(stamina - stamina_drain_per_sec * delta, 0.0, max_stamina)
 
+	if stamina < max_stamina:
+		stamina_regen_timer += delta
+		if stamina_regen_timer >= stamina_regen_interval:
+			stamina_regen_timer = 0.0
+			stamina = clampf(stamina + stamina_regen_amount, 0.0, max_stamina)
+	else:
+		stamina_regen_timer = 0.0
+
 	velocity = input_dir * current_speed
 	move_and_slide()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact"):
+		_interact()
+
+func _interact() -> void:
+	if current_interactable and current_interactable.has_method("interact"):
+		current_interactable.interact(self)
+	else:
+		print("no se utiliza en este lugar")
 
 func take_damage(amount: float) -> void:
 	if is_dead:
@@ -45,7 +63,6 @@ func take_damage(amount: float) -> void:
 	if health <= 0.0:
 		is_dead = true
 		print("has muerto")
-		# Cuando quieras que reinicie el nivel al morir, descomenta esta línea:
 		get_tree().reload_current_scene()
 
 func heal(amount: float) -> void:
@@ -53,5 +70,3 @@ func heal(amount: float) -> void:
 
 func restore_stamina(amount: float) -> void:
 	stamina = clampf(stamina + amount, 0.0, max_stamina)
-# hacer uan funcion de _interact para que cuando se utilice la E diga "no se utiliza en este lugar" y cuando si diga "utilizaste llave"
-# junto a la anterior se deberia comrpobar que tienes la llave pq die que la obtuviste pero talvez no se guardo.

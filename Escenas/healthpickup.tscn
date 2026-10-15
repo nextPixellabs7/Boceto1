@@ -21,3 +21,5 @@ texture = ExtResource("2_py2kk")
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_u2b8i")
 debug_color = Color(0.17835996, 0.6332659, 0.33385286, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

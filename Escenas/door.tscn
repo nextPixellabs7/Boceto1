@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jv1ba"]
 size = Vector2(136, 137)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ieep"]
+size = Vector2(373.5, 332)
+
 [node name="door" type="StaticBody2D" unique_id=1547949797]
 script = ExtResource("1_awj3x")
 
@@ -16,3 +19,9 @@ texture = ExtResource("1_x3sav")
 position = Vector2(-1, 0.5)
 shape = SubResource("RectangleShape2D_jv1ba")
 debug_color = Color(0.33894557, 0.16250324, 0.17185745, 0.41960785)
+
+[node name="InteracZone" type="Area2D" parent="." unique_id=119137500]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteracZone" unique_id=1163914383]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_5ieep")

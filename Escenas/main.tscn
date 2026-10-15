@@ -34,4 +34,4 @@ position = Vector2(-320, -261)
 position = Vector2(311, -228)
 
 [node name="door" parent="." unique_id=1547949797 instance=ExtResource("7_s2ilj")]
-position = Vector2(-489, -1)
+position = Vector2(-483, 3)
