@@ -5,18 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://c1jx6y7idecim" path="res://icon.svg" id="3_texture"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
-radius = 57.0
-height = 138.0
+radius = 68.0
+height = 144.0
 
 [node name="EnemigoEstatico" type="CharacterBody2D" unique_id=1878254183 node_paths=PackedStringArray("vida_component")]
 z_index = 1
-position = Vector2(-1, 0)
 motion_mode = 1
 script = ExtResource("1_controller")
 vida_component = NodePath("Componentes/HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=633655388]
-position = Vector2(-1, 0)
 shape = SubResource("CapsuleShape2D_1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=348380537]

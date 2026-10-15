@@ -37,14 +37,14 @@ pivote = NodePath("Pivote")
 shape = SubResource("CapsuleShape2D_jv1ba")
 debug_color = Color(0.9742381, 0.116502695, 0.28967178, 0.41960785)
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1139268276]
+modulate = Color(1, 0.08235294, 0, 1)
+texture = ExtResource("2_nxnwl")
+
 [node name="Entorno" type="Area2D" parent="." unique_id=192538688]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entorno" unique_id=1491996371]
 shape = SubResource("CircleShape2D_nqetu")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1139268276]
-modulate = Color(1, 0.08235294, 0, 1)
-texture = ExtResource("2_nxnwl")
 
 [node name="Pivote" type="Node2D" parent="." unique_id=2070832905]
 
