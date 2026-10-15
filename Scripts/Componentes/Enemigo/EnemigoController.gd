@@ -45,6 +45,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Si no tiene movimiento ni visión, es un enemigo estático/dummy y se queda quieto
 	if not movimiento_component or not pivote:
+		move_and_slide()
 		return
 
 	match estado_actual:
